@@ -1,0 +1,189 @@
+.container {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.leftItems {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.rightItems {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.langBtn {
+  border: none;
+  font-size: 16px;
+}
+.buttonLocation {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  background: transparent;
+  border: none;
+  color: #ccc;
+  cursor: pointer;
+  margin-left: 20px;
+}
+.citiesList {
+  width: 100%;
+  list-style: none;
+  font-size: 18px;
+  font-weight: 700;
+  overflow-y: scroll;
+  text-align: start;
+}
+.citiesList li {
+  margin-bottom: 10px;
+}
+.cityContainer {
+  max-width: 890px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 10px;
+  display: flex;
+}
+.title {
+  font-size: 26px;
+  font-weight: 700;
+}
+.subtitle {
+  margin: 30px 0;
+  font-size: 16px;
+  font-weight: 700;
+  color: #ccc;
+}
+.citiesList::-webkit-scrollbar {
+  width: 10px;
+  background-color: #f9f9fd;
+  border-radius: 10px;
+}
+.citiesList::-webkit-scrollbar-thumb {
+  background-color: #ccc;
+}
+.searchInput {
+  width: 100%;
+  margin-bottom: 30px;
+  background: #fbf3fe;
+  border: none;
+  padding: 15px 20px;
+  border-radius: 8px;
+}
+.link {
+  text-decoration: none;
+  color: black;
+}
+.link:hover {
+  color: #9161df;
+}
+.themeChangeBtn {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+.themeChangeContainer {
+  display: flex;
+  gap: 10px;
+}
+.registerBtn {
+  background-color: #9161df;
+  color: #fff;
+  border-radius: 8px;
+  padding: 15px 20px;
+  cursor: pointer;
+  transition: 0.5s;
+  font-weight: 700;
+  border: 1px solid #9161df;
+}
+.registerBtn:hover {
+  transition: 0.5s;
+  background-color: transparent;
+  color: #9161df;
+}
+.activeBtn {
+  width: 380px;
+  background-color: #9161df;
+  color: #fff;
+  border-radius: 8px;
+  padding: 15px 20px;
+  cursor: pointer;
+  transition: 0.5s;
+  font-weight: 700;
+  border: 1px solid #9161df;
+  font-size: 20px;
+}
+.inactiveBtn {
+  width: 380px;
+  font-size: 20px;
+  background-color: #8a8894;
+  color: #fff;
+  border-radius: 8px;
+  padding: 15px 20px;
+  cursor: pointer;
+  transition: 0.5s;
+  font-weight: 700;
+  border: 1px solid #8a8894;
+}
+.btnsContainer {
+  display: flex;
+  justify-content: space-around;
+  gap: 20px;
+}
+.phoneInput {
+  max-width: 480px;
+  width: 100%;
+  background: #fbf3fe;
+  border-radius: 8px;
+  border: none;
+  padding: 15px 20px;
+  font-size: 18px;
+  font-weight: 700;
+}
+.form {
+  width: 100%;
+}
+.label {
+  font-size: 18px;
+  font-weight: 700;
+
+  text-align: start;
+  max-width: 480px;
+  margin: 0 auto;
+  margin-bottom: 10px;
+  margin-top: 45px;
+}
+.text {
+  font-size: 18px;
+  max-width: 480px;
+  margin: 0 auto;
+  text-align: start;
+  margin-top: 10px;
+}
+.getSmaBtn {
+  background-color: #9161df;
+  color: #fff;
+  border-radius: 8px;
+  padding: 15px 20px;
+  cursor: pointer;
+  transition: 0.5s;
+  font-weight: 700;
+  font-size: 18px;
+  border: 1px solid #9161df;
+  max-width: 480px;
+  width: 100%;
+  margin-top: 50px;
+}
+.getSmaBtn:hover {
+  transition: 0.5s;
+  background-color: transparent;
+  color: #9161df;
+}
