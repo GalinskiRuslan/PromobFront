@@ -18,7 +18,7 @@ export const RegisterExecutorForm = () => {
         На этот номер вы получите SMS с кодом подтверждения авторизации
       </p>
       <button className={cl.getSmaBtn}>Продолжить</button>
-      <p className={cl.text}>
+      <p className={cl.small_text}>
         Нажимая «Зарегистрироваться», я даю свое согласие на обработку
         персональных данных.
       </p>

@@ -6,7 +6,7 @@ import { useScrollLock } from "@/app/hooks/useScrollLock";
 type Props = {
   children: React.ReactNode;
   visible: boolean;
-  setVisible: React.Dispatch<React.SetStateAction<boolean>>;
+  setVisible: (value: boolean) => void;
 };
 const Modal = ({ children, visible, setVisible }: Props) => {
   const rootClasses = [cl.modal];

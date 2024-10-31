@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import { CityChangeButton } from "./components/CityChangeButton";
 import { Link } from "@/langs";
 import Image from "next/image";
@@ -14,6 +14,9 @@ import { LoginButton } from "./components/LoginButton";
 
 export const Header = () => {
   const { theme } = useTheme();
+  const [isOpen, setIsOpen] = useState(false);
+  const [isOpenRegisterForm, setIsOpenRegisterForm] = useState(false);
+  const [isOpenLoginForm, setIsOpenLoginForm] = useState(false);
   return (
     <div className={cl.container}>
       <div className={cl.leftItems}>
@@ -26,12 +29,26 @@ export const Header = () => {
         </Link>
         <CityChangeButton />
       </div>
-      <div className={cl.rightItems}>
+      <div className={isOpen ? cl.rightItems_open : cl.rightItems}>
+        <button className={cl.closeBtnMob} onClick={() => setIsOpen(false)}>
+          x
+        </button>
         <LangChanger />
-        <RegisterButton />
+        <RegisterButton
+          visible={isOpenRegisterForm}
+          setVisible={setIsOpenRegisterForm}
+          setVisibleLogin={setIsOpenLoginForm}
+        />
         <LoginButton />
         <ThemeCganger />
       </div>
+      <button className={cl.hamburger} onClick={() => setIsOpen(!isOpen)}>
+        <span className={cl.line}></span>
+      </button>
+      <div
+        className={isOpen ? cl.overview_open : cl.overview_close}
+        onClick={() => setIsOpen(false)}
+      ></div>
     </div>
   );
 };

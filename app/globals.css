@@ -8,12 +8,27 @@
   /* Your default theme */
   --background: white;
   --foreground: black;
+  --themecolor: black;
+  --twothemecolor: white;
+  --blackitems: #fff;
 }
 
 [data-theme="dark"] {
   --background: black;
   --foreground: white;
+  --themecolor: white;
+  --twothemecolor: black;
+  --blackitems: #2f2f2f;
 }
 input:focus {
   outline: none;
+}
+body {
+  overflow: hidden;
+}
+select {
+  background: transparent;
+}
+select:focus {
+  background-color: var(--blackitems); /* Цвет фона при выборе */
 }

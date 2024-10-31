@@ -4,16 +4,21 @@ import cl from "../style.module.css";
 import { useState } from "react";
 import { RegisterExecutorForm } from "./RegisterExecutorForm";
 import { RegisterClientForm } from "./RegisterClientForm";
-export const RegisterButton = () => {
-  const [modal, setModal] = useState(false);
+
+interface IRegisterButtonProps {
+  visible: boolean;
+  setVisible: (value: boolean) => void;
+  setVisibleLogin: (value: boolean) => void;
+}
+export const RegisterButton = (props: IRegisterButtonProps) => {
   const [isExecutor, setIsExecutor] = useState(true);
   return (
     <>
-      <button className={cl.registerBtn} onClick={() => setModal(true)}>
+      <button className={cl.registerBtn} onClick={() => props.setVisible(true)}>
         Регистрация
       </button>
-      <Modal visible={modal} setVisible={setModal}>
-        <p className={cl.title} style={{ margin: "30px 0" }}>
+      <Modal visible={props.visible} setVisible={props.setVisible}>
+        <p className={cl.title} style={{ margin: "10px 0" }}>
           Регистрация
         </p>
         <div className={cl.btnsContainer}>
@@ -31,7 +36,15 @@ export const RegisterButton = () => {
           </button>
         </div>
         {isExecutor ? <RegisterExecutorForm /> : <RegisterClientForm />}
-        <button>Уже есть аккаунт? Войти</button>
+        <button
+          className={cl.loginBtn}
+          onClick={() => {
+            props.setVisibleLogin(true);
+            props.setVisible(false);
+          }}
+        >
+          Уже есть аккаунт? Войти
+        </button>
       </Modal>
     </>
   );
