@@ -8,6 +8,7 @@ import { Header } from "../components/modules/layouts/Header/Header";
 import cl from "./style.module.css";
 import { ErrorModal } from "../components/modules/ErrorModal/ErrorModal";
 import { Loader } from "../components/modules/Loader/Loader";
+import { Footer } from "../components/modules/layouts/Footer/Footer";
 
 export const metadata: Metadata = {
   title: "Promobilograf",
@@ -37,6 +38,7 @@ export default function RootLayout({
                 <Header />
                 {children}
               </div>
+              <Footer />
               <ErrorModal />
               <Loader />
             </ThemeProvider>

@@ -2,4 +2,5 @@
   max-width: 1440px;
   margin: 0 auto;
   padding: 80px 20px;
+  min-height: 100vh;
 }

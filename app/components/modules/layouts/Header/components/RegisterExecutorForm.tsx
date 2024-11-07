@@ -40,7 +40,6 @@ export const RegisterExecutorForm = () => {
       ).unwrap();
       setCodeId(response.code_id);
       sessionStorage.setItem("code_id", response.code_id);
-      await dispatch(getUserInfo()).unwrap();
       dispatch(setVisibleLoader(false));
     } catch (error: any) {
       dispatch(setVisibleLoader(false));
@@ -66,6 +65,7 @@ export const RegisterExecutorForm = () => {
       setCodeId(null);
       dispatch(setIsOpenRegisterModal(false));
       dispatch(setIsOpenMobMenu(false));
+      await dispatch(getUserInfo()).unwrap();
       router.push("/registration/instruction");
       dispatch(setVisibleLoader(false));
     } catch (error: any) {
@@ -74,6 +74,26 @@ export const RegisterExecutorForm = () => {
       }
       if (countTry < 2) {
         setCodeId(null);
+        setCountTry(3);
+        setPassword("");
+        setConfirmPassword("");
+        sessionStorage.removeItem("code_id");
+        setCode(["", "", "", ""]);
+      }
+      if (error.errorText === "Код не найден") {
+        setCodeId(null);
+        setCountTry(3);
+        setCode(["", "", "", ""]);
+        setConfirmPassword("");
+        setPassword("");
+        sessionStorage.removeItem("code_id");
+      }
+      if (error.status == 500) {
+        setCodeId(null);
+        setCountTry(3);
+        setCode(["", "", "", ""]);
+        setConfirmPassword("");
+        setPassword("");
         sessionStorage.removeItem("code_id");
       }
       dispatch(setVisibleLoader(false));

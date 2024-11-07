@@ -17,6 +17,7 @@ import {
   setVisibleLoader,
 } from "@/app/store/slices/appSlice";
 import { userComments, userStatistic } from "@/app/store/slices/userSlice";
+import { PortfolioUpdater } from "../PortfolioUpdater/PortfolioUpdater";
 
 interface Props {
   user: IUser;
@@ -66,11 +67,11 @@ export const ProfileCardEditor = ({ user }: Props) => {
       <div className={cl.rightBlock}>
         <button className={cl.staticBlock}>
           <Image alt="map" src={src3} />
-          <p>{comments.comments.length}</p>
+          <p>{comments?.comments?.length}</p>
         </button>
         <button className={cl.staticBlock}>
           <Image alt="map" src={src2} />
-          <p>{statistic.statistic.view_count}</p>
+          <p>Статистика</p>
         </button>
       </div>
     </div>

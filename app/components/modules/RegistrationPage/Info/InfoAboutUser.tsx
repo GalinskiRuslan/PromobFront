@@ -12,11 +12,13 @@ import {
   setIsOpenModal,
   setVisibleLoader,
 } from "@/app/store/slices/appSlice";
+import { getUserInfo } from "@/app/store/slices/authSlice";
 
-type Props = {};
+type Props = { isRegister?: boolean };
 
-export const InfoAboutUser = (props: Props) => {
+export const InfoAboutUser = ({ isRegister = true }: Props) => {
   const dispatch = useDispatch<AppDispatch>();
+  const { user } = useSelector((state: any) => state.auth);
   const { categories } = useSelector((state: any) => state.categories);
   const { cities } = useSelector((state: any) => state.city);
   const [changeCategories, setChangeCategories] = useState<any>([]);
@@ -51,10 +53,10 @@ export const InfoAboutUser = (props: Props) => {
       return true;
     }
   };
-  const saveInfo = () => {
+  const saveInfo = async () => {
     dispatch(setVisibleLoader(true));
     try {
-      dispatch(
+      await dispatch(
         updateInfoUser({
           cost_from: Number(costFrom),
           cost_up: Number(costUp),
@@ -69,6 +71,7 @@ export const InfoAboutUser = (props: Props) => {
           ],
         })
       ).unwrap();
+      await dispatch(getUserInfo()).unwrap();
       dispatch(setVisibleLoader(false));
       router.push("/registration/profile");
     } catch (error: any) {
@@ -81,6 +84,21 @@ export const InfoAboutUser = (props: Props) => {
   useEffect(() => {
     dispatch(getAllCategories());
   }, []);
+  useEffect(() => {
+    if (user) {
+      setCostFrom(user.cost_from ? user.cost_from : "");
+      setCostUp(user.cost_up ? user.cost_up : "");
+      setDetails(user.details ? user.details : "");
+      setAboutYourself(user.about_yourself ? user.about_yourself : "");
+      setChangeCategories(
+        user.categories_id ? JSON.parse(user.categories_id) : []
+      );
+      setCity(user.cities_id ? user.cities_id : 0);
+      setRusLang(user.language.includes("rus") ? true : false);
+      setKazLang(user.language.includes("kaz") ? true : false);
+      setEngLang(user.language.includes("eng") ? true : false);
+    }
+  }, [user]);
   return (
     <div className={cl.container}>
       <p className={cl.title}>Информация о вас</p>
@@ -88,6 +106,7 @@ export const InfoAboutUser = (props: Props) => {
       <div className={cl.categoryList}>
         {categories?.map((category: any) => (
           <button
+            key={category.id}
             onClick={() => onChangeCategory(category.id)}
             className={
               changeCategories.includes(category.id)
@@ -192,18 +211,28 @@ export const InfoAboutUser = (props: Props) => {
           </div>
         </div>
       </div>
-      <div className={cl.navBtns}>
-        <button className={cl.btnBack} onClick={() => router.back()}>
-          Назад
-        </button>
+      {isRegister ? (
+        <div className={cl.navBtns}>
+          <button className={cl.btnBack} onClick={() => router.back()}>
+            Назад
+          </button>
+          <button
+            className={cl.nextBtn}
+            disabled={isDisabled()}
+            onClick={saveInfo}
+          >
+            Далее
+          </button>
+        </div>
+      ) : (
         <button
-          className={cl.nextBtn}
           disabled={isDisabled()}
-          onClick={saveInfo}
+          className={cl.nextBtn}
+          style={{ marginTop: "20px" }}
         >
-          Далее
+          Сохранить данные о пользователе
         </button>
-      </div>
+      )}
     </div>
   );
 };

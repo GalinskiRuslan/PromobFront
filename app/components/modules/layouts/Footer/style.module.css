@@ -1,0 +1,28 @@
+.container {
+  width: 100%;
+  background: #2c2a2f;
+}
+.innerContainer {
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 80px 20px;
+}
+.proBtn {
+  max-width: 240px;
+  width: 100%;
+  padding: 25px;
+  border-radius: 16px;
+  font-size: 24px;
+  font-weight: 700;
+  background-color: #9161df;
+  color: #fff;
+  border: 1px solid #9161df;
+  cursor: pointer;
+  transition: 0.5s;
+}
+.proBtn:hover {
+  background-color: transparent;
+  color: #9161df;
+  transition: 0.5s;
+}

@@ -103,8 +103,21 @@ export const uploadPortfolioPhoto = createAsyncThunk(
     const formData = new FormData();
     formData.append("file", data);
     try {
-      const response = await $axios.post<any>(`/uploadAvatar`, formData, {
+      const response = await $axios.post<any>(`/savePortfolioItem`, formData, {
         headers: { "Content-Type": "multipart/form-data" },
+      });
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);
+export const deletePortfolioPhoto = createAsyncThunk(
+  "uploadPortfolioPhoto",
+  async (fileName: string, { rejectWithValue }) => {
+    try {
+      const response = await $axios.post<any>(`/deletePortfolioItem`, {
+        fileName,
       });
       return response.data;
     } catch (error) {
