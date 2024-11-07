@@ -1,0 +1,29 @@
+.container {
+  width: 100%;
+}
+.list {
+  list-style: none;
+  font-size: 18px;
+  font-weight: 700;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  display: flex;
+}
+.categoryItem {
+  display: flex;
+  justify-content: space-between;
+  cursor: pointer;
+}
+.categoryItem:hover {
+  color: #9161df;
+}
+.listLink {
+  text-decoration: none;
+  color: var(--themecolor);
+}
+.listLinkActive {
+  color: #9161df;
+  text-decoration: none;
+}
+

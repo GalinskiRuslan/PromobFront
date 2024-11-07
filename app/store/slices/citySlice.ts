@@ -28,6 +28,8 @@ export const citySlice = createSlice({
   extraReducers: (builder) =>
     builder
       .addCase(getAllCities.pending, (state) => {})
-      .addCase(getAllCities.fulfilled, (state, action) => {})
+      .addCase(getAllCities.fulfilled, (state, action) => {
+        state.cities = action.payload;
+      })
       .addCase(getAllCities.rejected, (state, action) => {}),
 });

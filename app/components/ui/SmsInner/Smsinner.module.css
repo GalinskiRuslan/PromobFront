@@ -1,0 +1,35 @@
+.code__input {
+  height: 80px;
+  width: 72px;
+  font-weight: 700;
+  font-size: 32px;
+  color: #000;
+  border-radius: 10px;
+  border: none;
+  margin: 0 5px;
+  box-sizing: border-box;
+  padding: 15px 10px;
+  text-align: center;
+  outline: none;
+  background: #f2f2f2f2;
+  border: 1px solid #f2f2f2f2;
+}
+.form {
+  display: flex;
+  justify-content: space-between;
+}
+.code__input:focus {
+  font-size: 32px;
+  font-weight: 700;
+}
+@media screen and (max-width: 1200px) {
+  .code__input {
+    width: 48px;
+    font-size: 30px;
+    padding: 5px;
+    height: 90px;
+  }
+  .code__input:focus {
+    font-size: 30px;
+  }
+}

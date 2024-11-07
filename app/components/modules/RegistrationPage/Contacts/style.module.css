@@ -1,0 +1,55 @@
+.container {
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 80px 0;
+}
+.title {
+  text-align: start;
+  margin-bottom: 50px;
+  font-size: 48px;
+  font-weight: 700;
+}
+.text {
+  font-size: 32px;
+  margin-bottom: 45px;
+}
+.toggleCont {
+  display: flex;
+  justify-content: space-between;
+  margin: 20px 0;
+}
+.item {
+  margin: 30px 0;
+}
+.label {
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+.navBtns {
+  display: flex;
+  justify-content: space-between;
+}
+.btnBack {
+  background: transparent;
+  border: 1px solid #9161df;
+  color: #9161df;
+  padding: 15px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.5s;
+  font-weight: 500;
+}
+.nextBtn {
+  background: #9161df;
+  color: #fff;
+  font-weight: 700;
+  border-radius: 8px;
+  border: none;
+  padding: 15px;
+  cursor: pointer;
+}
+.nextBtn:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}

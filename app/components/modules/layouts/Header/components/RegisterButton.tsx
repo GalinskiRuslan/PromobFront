@@ -4,20 +4,29 @@ import cl from "../style.module.css";
 import { useState } from "react";
 import { RegisterExecutorForm } from "./RegisterExecutorForm";
 import { RegisterClientForm } from "./RegisterClientForm";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch } from "@/app/store/store";
+import {
+  setIsOpenLoginModal,
+  setIsOpenRegisterModal,
+} from "@/app/store/slices/appSlice";
 
-interface IRegisterButtonProps {
-  visible: boolean;
-  setVisible: (value: boolean) => void;
-  setVisibleLogin: (value: boolean) => void;
-}
-export const RegisterButton = (props: IRegisterButtonProps) => {
+export const RegisterButton = () => {
+  const dispatch = useDispatch<AppDispatch>();
+  const { isOpenRegisterModal } = useSelector((state: any) => state.app);
   const [isExecutor, setIsExecutor] = useState(true);
   return (
     <>
-      <button className={cl.registerBtn} onClick={() => props.setVisible(true)}>
+      <button
+        className={cl.registerBtn}
+        onClick={() => dispatch(setIsOpenRegisterModal(true))}
+      >
         Регистрация
       </button>
-      <Modal visible={props.visible} setVisible={props.setVisible}>
+      <Modal
+        visible={isOpenRegisterModal}
+        setVisible={() => dispatch(setIsOpenRegisterModal(false))}
+      >
         <p className={cl.title} style={{ margin: "10px 0" }}>
           Регистрация
         </p>
@@ -39,8 +48,8 @@ export const RegisterButton = (props: IRegisterButtonProps) => {
         <button
           className={cl.loginBtn}
           onClick={() => {
-            props.setVisibleLogin(true);
-            props.setVisible(false);
+            dispatch(setIsOpenLoginModal(true));
+            dispatch(setIsOpenRegisterModal(false));
           }}
         >
           Уже есть аккаунт? Войти

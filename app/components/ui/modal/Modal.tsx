@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import cl from "./Modal.module.css";
 import { useScrollLock } from "@/app/hooks/useScrollLock";
 
@@ -14,9 +14,16 @@ const Modal = ({ children, visible, setVisible }: Props) => {
   if (visible) {
     rootClasses.push(cl.active);
     // lock();
-  } else {
-    // unlock();
   }
+  useEffect(() => {
+    if (visible) {
+      lock();
+    } else {
+      unlock();
+    }
+    // Очистка эффекта при размонтировании компонента
+    return () => unlock();
+  }, [visible, lock, unlock]);
   if (visible) {
     return (
       <div className={rootClasses.join(" ")} onClick={() => setVisible(false)}>
@@ -24,6 +31,9 @@ const Modal = ({ children, visible, setVisible }: Props) => {
           className={cl.content}
           onClick={(event) => event.stopPropagation()}
         >
+          <button className={cl.closeBtn} onClick={() => setVisible(false)}>
+            ×
+          </button>
           {children}
         </div>
       </div>

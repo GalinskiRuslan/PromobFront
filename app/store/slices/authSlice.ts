@@ -50,6 +50,23 @@ export const registrWithCode = createAsyncThunk(
     }
   }
 );
+export const registerWithEmail = createAsyncThunk(
+  "registerWithEmail",
+  async (
+    { email, password }: { email: string; password: string },
+    { rejectWithValue }
+  ) => {
+    try {
+      const response = await $axios.post<string>(`/registerWithEmail`, {
+        email,
+        password,
+      });
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);
 export const login = createAsyncThunk(
   "login",
   async (
@@ -57,7 +74,7 @@ export const login = createAsyncThunk(
     { rejectWithValue }
   ) => {
     try {
-      const response = await $axios.post<string>(`/login`, {
+      const response = await $axios.post<any>(`/login`, {
         tel: phone,
         password: password,
       });
@@ -74,7 +91,7 @@ export const loginWithEmail = createAsyncThunk(
     { rejectWithValue }
   ) => {
     try {
-      const response = await $axios.post<string>(`/loginWithEmail`, {
+      const response = await $axios.post<any>(`/loginWithMail`, {
         email,
         password,
       });
@@ -106,6 +123,17 @@ export const deleteAccount = createAsyncThunk(
     }
   }
 );
+export const getUserInfo = createAsyncThunk(
+  "getUserInfo",
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await $axios.get<any>(`/getUserInfo`);
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);
 
 export const authSlice = createSlice({
   name: "auth",
@@ -116,5 +144,20 @@ export const authSlice = createSlice({
     setUser: (state, action) => {
       state.user = action.payload;
     },
+    clearUser: (state) => {
+      state.user = null;
+    },
   },
+  extraReducers: (builder) =>
+    builder
+      .addCase(getUserInfo.pending, (state) => {})
+      .addCase(getUserInfo.fulfilled, (state, action) => {
+        state.user = action.payload.user;
+      })
+      .addCase(getUserInfo.rejected, (state, action) => {}),
 });
+export const {
+  clearUser,
+}: {
+  clearUser: any;
+} = authSlice.actions;

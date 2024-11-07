@@ -13,6 +13,7 @@ $axios.interceptors.response.use(
   },
   (error) => {
     if (error.response?.status === 401) {
+      localStorage.removeItem("token");
       setTimeout(() => {
         window.location.replace("/");
       }, 2000);
@@ -30,7 +31,8 @@ $axios.interceptors.response.use(
         });
       } else if (typeof error.response?.data == "object") {
         return Promise.reject({
-          errorText: error.response.data.title,
+          method: error.config?.url,
+          errorText: error.response.data.message,
           status: 400,
         });
       } else {

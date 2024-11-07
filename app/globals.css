@@ -11,6 +11,7 @@
   --themecolor: black;
   --twothemecolor: white;
   --blackitems: #fff;
+  --btnsbackground: #fbf3fe;
 }
 
 [data-theme="dark"] {
@@ -19,12 +20,23 @@
   --themecolor: white;
   --twothemecolor: black;
   --blackitems: #2f2f2f;
+  --btnsbackground: #ffffff;
+}
+input {
+  width: 100%;
+  background: #fbf3fe;
+  border-radius: 8px;
+  border: none;
+  padding: 15px 20px;
+  font-size: 18px;
+  font-weight: 700;
+  color: #111;
 }
 input:focus {
   outline: none;
 }
 body {
-  overflow: hidden;
+  overflow-x: hidden;
 }
 select {
   background: transparent;

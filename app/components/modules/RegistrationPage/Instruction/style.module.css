@@ -1,0 +1,51 @@
+.container {
+  max-width: 1200px;
+  padding-top: 80px;
+  width: 100%;
+  margin: 0 auto;
+}
+.videoinstruction {
+  width: 100%;
+  height: auto;
+}
+.navigation {
+  display: flex;
+  justify-content: space-between;
+  margin: 60px 0;
+}
+.nav_readTextBtn {
+  background: transparent;
+  border: 1px solid var(--themecolor);
+  padding: 15px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.5s;
+  font-weight: 500;
+}
+.nav_readTextBtn:hover {
+  transition: 0.5s;
+  color: #9161df;
+  border: 1px solid #9161df;
+}
+.nav_nextBtn {
+  background: #9161df;
+  color: #fff;
+  font-weight: 700;
+  border-radius: 8px;
+  border: none;
+  padding: 15px;
+  cursor: pointer;
+}
+.instructionTitle {
+  font-size: 32px;
+  font-weight: 700;
+}
+.modalContainer {
+  text-align: start;
+}
+.purpure {
+  color: #9161df;
+}
+.modalList {
+  padding-left: 20px;
+}

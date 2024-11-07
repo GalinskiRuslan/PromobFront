@@ -67,6 +67,14 @@
 .citiesList::-webkit-scrollbar-thumb {
   background-color: #ccc;
 }
+.rightItems_open::-webkit-scrollbar {
+  width: 5px;
+  background-color: #f9f9fd;
+  border-radius: 10px;
+}
+.rightItems_open::-webkit-scrollbar-thumb {
+  background-color: #ccc;
+}
 .searchInput {
   width: 100%;
   margin-bottom: 30px;
@@ -183,7 +191,7 @@
   border: 1px solid #9161df;
   max-width: 480px;
   width: 100%;
-  margin-top: 30px;
+  margin-top: 20px;
 }
 .getSmaBtn:hover {
   transition: 0.5s;
@@ -224,14 +232,45 @@
   border-bottom: 1px solid #9161df;
   cursor: pointer;
 }
+.getSmaBtn:disabled {
+  background-color: #8a8894;
+}
+.smsInner_text {
+  font-size: 16px;
+  font-weight: 700;
+  margin-top: 30px;
+  margin-bottom: 20px;
+}
+.countTry {
+  font-size: 10px;
+  color: red;
+}
+.profileBtn {
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+.profileContainer {
+  display: flex;
+  gap: 20px;
+}
+.moblogo {
+  display: none;
+}
 @media screen and (max-width: 1200px) {
+  .moblogo {
+    display: block;
+  }
   .closeBtnMob {
+    position: absolute;
     display: block;
     border: none;
     background: transparent;
     cursor: pointer;
     font-size: 24px;
     font-weight: 700;
+    top: 10px;
+    right: 20px;
   }
   .rightItems {
     position: absolute;
@@ -247,12 +286,14 @@
     z-index: 550;
     background-color: var(--blackitems);
     padding: 30px;
+    padding-top: 60px;
     border-radius: 8px 0 0 8px;
     display: flex;
     flex-direction: column;
     gap: 10px;
     max-width: 50%;
     width: 100%;
+    overflow-y: scroll;
   }
   .hamburger {
     display: block;
