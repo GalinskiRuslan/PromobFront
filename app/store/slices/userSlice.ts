@@ -62,7 +62,7 @@ export const updateInfoUser = createAsyncThunk(
       about_yourself: string;
       cities_id: number;
       language: any;
-      categories_id: Array<any>;
+      categories_id: Array<string>;
     },
     { rejectWithValue }
   ) => {

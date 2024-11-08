@@ -52,14 +52,18 @@ export const CityChangeButton = () => {
         <Image src={locationSrc} alt="location" />
         <span>
           {pathName.includes("/city")
-            ? pathName.split("/city/")[1]
+            ? cities?.find(
+                (city: any) => city.id == pathName.split("/city/")[1]
+              )?.city
             : "Выберете город"}
         </span>
       </button>
       <Modal visible={visible} setVisible={setVisible}>
         <p className={cl.title}>
           {pathName.includes("/city")
-            ? pathName.split("/city/")[1]
+            ? cities?.find(
+                (city: any) => city.id == pathName.split("/city/")[1]
+              )?.city
             : "Выберете город"}
         </p>
         <p className={cl.subtitle}>
@@ -78,9 +82,9 @@ export const CityChangeButton = () => {
               {filteredCities.map((city: any) => (
                 <Link
                   className={
-                    pathName.includes(city.alias) ? cl.activeLink : cl.link
+                    pathName.includes(city.id) ? cl.activeLink : cl.link
                   }
-                  href={`/city/${city.alias}`}
+                  href={`/city/${city.id}`}
                   key={city.id}
                 >
                   <li onClick={() => setVisible(false)}>{city.city} </li>

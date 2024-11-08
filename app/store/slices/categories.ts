@@ -14,6 +14,19 @@ export const getAllCategories = createAsyncThunk(
     }
   }
 );
+export const getCategoriesWithCity = createAsyncThunk(
+  "getCategoriesWithCity",
+  async ({ city }: { city: number }, { rejectWithValue }) => {
+    try {
+      const response = await $axios.get<any>(
+        `/getCategoriesWithCity?city=${city}`
+      );
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);
 
 export const categoriesSlice = createSlice({
   name: "categories",
@@ -31,5 +44,10 @@ export const categoriesSlice = createSlice({
       .addCase(getAllCategories.fulfilled, (state, action) => {
         state.categories = action.payload.categories;
       })
-      .addCase(getAllCategories.rejected, (state, action) => {}),
+      .addCase(getAllCategories.rejected, (state, action) => {})
+      .addCase(getCategoriesWithCity.pending, (state) => {})
+      .addCase(getCategoriesWithCity.fulfilled, (state, action) => {
+        state.categories = action.payload.categories;
+      })
+      .addCase(getCategoriesWithCity.rejected, (state, action) => {}),
 });

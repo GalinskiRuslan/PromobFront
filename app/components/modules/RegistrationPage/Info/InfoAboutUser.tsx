@@ -21,7 +21,7 @@ export const InfoAboutUser = ({ isRegister = true }: Props) => {
   const { user } = useSelector((state: any) => state.auth);
   const { categories } = useSelector((state: any) => state.categories);
   const { cities } = useSelector((state: any) => state.city);
-  const [changeCategories, setChangeCategories] = useState<any>([]);
+  const [changeCategories, setChangeCategories] = useState<Array<string>>([]);
   const router = useRouter();
   const [costFrom, setCostFrom] = useState("");
   const [costUp, setCostUp] = useState("");
@@ -31,11 +31,13 @@ export const InfoAboutUser = ({ isRegister = true }: Props) => {
   const [kazLang, setKazLang] = useState(false);
   const [engLang, setEngLang] = useState(false);
   const [city, setCity] = useState(0);
-  const onChangeCategory = (id: number) => {
-    if (changeCategories.includes(id)) {
-      setChangeCategories(changeCategories.filter((item: any) => item !== id));
+  const onChangeCategory = (id: string) => {
+    if (changeCategories.includes(id.toString())) {
+      setChangeCategories(
+        changeCategories.filter((item: any) => item !== id.toString())
+      );
     } else if (changeCategories.length < 3) {
-      setChangeCategories([...changeCategories, id]);
+      setChangeCategories([...changeCategories, id.toString()]);
     } else {
       return;
     }
@@ -91,12 +93,14 @@ export const InfoAboutUser = ({ isRegister = true }: Props) => {
       setDetails(user.details ? user.details : "");
       setAboutYourself(user.about_yourself ? user.about_yourself : "");
       setChangeCategories(
-        user.categories_id ? JSON.parse(user.categories_id) : []
+        user.categories_id
+          ? JSON.parse(user.categories_id).map((item: any) => item.toString())
+          : []
       );
       setCity(user.cities_id ? user.cities_id : 0);
-      setRusLang(user.language.includes("rus") ? true : false);
-      setKazLang(user.language.includes("kaz") ? true : false);
-      setEngLang(user.language.includes("eng") ? true : false);
+      setRusLang(user.language?.includes("rus") ? true : false);
+      setKazLang(user.language?.includes("kaz") ? true : false);
+      setEngLang(user.language?.includes("eng") ? true : false);
     }
   }, [user]);
   return (
@@ -107,9 +111,9 @@ export const InfoAboutUser = ({ isRegister = true }: Props) => {
         {categories?.map((category: any) => (
           <button
             key={category.id}
-            onClick={() => onChangeCategory(category.id)}
+            onClick={() => onChangeCategory(category.id.toString())}
             className={
-              changeCategories.includes(category.id)
+              changeCategories.includes(category.id.toString())
                 ? cl.activeCategory
                 : cl.category
             }
@@ -229,6 +233,7 @@ export const InfoAboutUser = ({ isRegister = true }: Props) => {
           disabled={isDisabled()}
           className={cl.nextBtn}
           style={{ marginTop: "20px" }}
+          onClick={saveInfo}
         >
           Сохранить данные о пользователе
         </button>

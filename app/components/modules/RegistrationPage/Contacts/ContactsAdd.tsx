@@ -1,7 +1,7 @@
 "use client";
 import { ToggleSwitcher } from "@/app/components/ui/ToggleSwither/ToggleSwitcher";
 import cl from "./style.module.css";
-import { useEffect, useState } from "react";
+import { use, useEffect, useState } from "react";
 import { formatPhoneNumber } from "@/app/helpers/functions";
 import { AppDispatch } from "@/app/store/store";
 import { useDispatch, useSelector } from "react-redux";
@@ -118,14 +118,14 @@ export const ContactsAdd = ({ isStep = true }: IProps) => {
 
   useEffect(() => {
     if (user) {
-      setWhatsApp(user.whatsapp);
-      setName(user.name);
-      setSurname(user.surname);
-      setSurname2(user.surname_2);
-      setNick(user.nickname);
+      setWhatsApp(user.whatsapp ? user.whatsapp.replace(/\s+/g, "") : "");
+      setName(user.name ? user.name : "");
+      setSurname(user.surname ? user.surname : "");
+      setSurname2(user.surname_2 ? user.surname_2 : "");
+      setNick(user.nickname ? user.nickname : "");
       setIsOnNickname(user.nickname_true);
-      setInst(user.instagram);
-      setSite(user.site);
+      setInst(user.instagram ? user.instagram : "");
+      setSite(user.site ? user.site : "");
     }
   }, [user]);
   return (

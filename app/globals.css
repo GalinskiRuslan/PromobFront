@@ -12,6 +12,7 @@
   --twothemecolor: white;
   --blackitems: #fff;
   --btnsbackground: #fbf3fe;
+  --usercardcolor: #fbf3fe;
 }
 
 [data-theme="dark"] {
@@ -21,6 +22,7 @@
   --twothemecolor: black;
   --blackitems: #2f2f2f;
   --btnsbackground: #ffffff;
+  --usercardcolor: #2f2f2f;
 }
 input {
   width: 100%;

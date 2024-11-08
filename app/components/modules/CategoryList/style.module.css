@@ -14,6 +14,7 @@
   display: flex;
   justify-content: space-between;
   cursor: pointer;
+  gap: 20px;
 }
 .categoryItem:hover {
   color: #9161df;
@@ -26,4 +27,3 @@
   color: #9161df;
   text-decoration: none;
 }
-

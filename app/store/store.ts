@@ -6,12 +6,14 @@ import { citySlice } from "./slices/citySlice";
 import { authSlice } from "./slices/authSlice";
 import { appSlice } from "./slices/appSlice";
 import { categoriesSlice } from "./slices/categories";
+import { usersSlice } from "./slices/usersSlice";
 
 export const store = configureStore({
   reducer: {
     app: appSlice.reducer,
     auth: authSlice.reducer,
     user: userSlice.reducer,
+    users: usersSlice.reducer,
     city: citySlice.reducer,
     categories: categoriesSlice.reducer,
   },

@@ -87,6 +87,11 @@
   text-decoration: none;
   color: black;
 }
+.activeLink {
+  color: #9161df;
+  font-weight: 700;
+  text-decoration: none;
+}
 .link:hover {
   color: #9161df;
 }
@@ -338,5 +343,10 @@
     text-align: center;
     padding: 3px;
     border-radius: 3px;
+  }
+}
+@media screen and (max-width: 680px) {
+  .rightItems_open {
+    max-width: 100%;
   }
 }

@@ -4,3 +4,12 @@
   padding: 80px 20px;
   min-height: 100vh;
 }
+.categories {
+  max-width: 210px;
+  width: 100%;
+}
+.content {
+  display: flex;
+  margin-top: 80px;
+  gap: 30px;
+}

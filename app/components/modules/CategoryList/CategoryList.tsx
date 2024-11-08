@@ -1,8 +1,17 @@
 "use client";
+import {
+  serErrorMethod,
+  setErrorCode,
+  setErrorText,
+  setVisibleLoader,
+} from "@/app/store/slices/appSlice";
 import cl from "./style.module.css";
-import { getAllCategories } from "@/app/store/slices/categories";
+import {
+  getAllCategories,
+  getCategoriesWithCity,
+} from "@/app/store/slices/categories";
 import { AppDispatch } from "@/app/store/store";
-import { Link } from "@/langs";
+import { Link, usePathname } from "@/langs";
 import { useSearchParams } from "next/navigation";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -11,17 +20,50 @@ type Props = {};
 
 export const CategoryList = (props: Props) => {
   const searchParams = useSearchParams();
+  const pathName = usePathname();
   const dispatch = useDispatch<AppDispatch>();
   const { categories } = useSelector((state: any) => state.categories);
+  const getAllCategoriesLoc = async () => {
+    dispatch(setVisibleLoader(true));
+    try {
+      const response = await dispatch(getAllCategories()).unwrap();
+      dispatch(setVisibleLoader(false));
+    } catch (error: any) {
+      dispatch(setVisibleLoader(false));
+      dispatch(setErrorText(error.errorText));
+      dispatch(serErrorMethod(error.method));
+      dispatch(setErrorCode(error.status));
+    }
+  };
+
+  const getCategoriesWithCityLocal = async (id: number) => {
+    dispatch(setVisibleLoader(true));
+    try {
+      const response = await dispatch(
+        getCategoriesWithCity({ city: id })
+      ).unwrap();
+      dispatch(setVisibleLoader(false));
+    } catch (error: any) {
+      dispatch(setVisibleLoader(false));
+      dispatch(setErrorText(error.errorText));
+      dispatch(serErrorMethod(error.method));
+      dispatch(setErrorCode(error.status));
+    }
+  };
   useEffect(() => {
-    dispatch(getAllCategories());
-  }, []);
+    if (pathName.includes("city")) {
+      getCategoriesWithCityLocal(Number(pathName.split("/city/")[1]));
+    } else {
+      getAllCategoriesLoc();
+    }
+  }, [pathName]);
   return (
     <div className={cl.container}>
       <ul className={cl.list}>
         {categories?.map((category: any) => (
           <Link
-            href={`?category=${category.alias}`}
+            key={category.id}
+            href={`?category=${category.id}`}
             className={
               searchParams.get("category") === category.alias
                 ? cl.listLinkActive
