@@ -28,4 +28,5 @@ export interface IUser {
   is_verified: number;
   created_at: string;
   updated_at: string;
+  comments: Array<any>;
 }

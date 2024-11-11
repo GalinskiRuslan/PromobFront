@@ -85,7 +85,7 @@
 }
 .link {
   text-decoration: none;
-  color: black;
+  color: var(--themecolor);
 }
 .activeLink {
   color: #9161df;

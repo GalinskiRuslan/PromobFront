@@ -11,6 +11,7 @@
 }
 .headContent {
   display: flex;
+  justify-content: space-between;
 }
 .nick {
   font-size: 20px;
@@ -26,4 +27,45 @@
   display: flex;
   gap: 10px;
   align-items: center;
+}
+.leftContent {
+  display: flex;
+}
+.commentBtn {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+.contactsBtn {
+  cursor: pointer;
+  color: #fff;
+  background: #9161df;
+  border-radius: 8px;
+  padding: 10px 20px;
+  transition: 0.5s;
+  font-weight: 700;
+  font-size: 18px;
+  border: 1px solid #9161df;
+  max-width: 480px;
+  width: 100%;
+  margin-top: 20px;
+}
+.contactsTitle {
+  font-size: 42px;
+  font-weight: 700;
+  margin: 30px 0;
+  min-width: 320px;
+  width: 100%;
+}
+.linkContacts {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  font-size: 18px;
+  text-decoration: none;
+  color: #474646;
+  justify-content: center;
+  padding: 15px 0;
 }

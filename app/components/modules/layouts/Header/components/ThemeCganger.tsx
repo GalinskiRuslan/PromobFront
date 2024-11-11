@@ -6,9 +6,13 @@ import activeSun from "../assets/sun-active.png";
 import moon from "../assets/moon.png";
 import moonActive from "../assets/moon-active.png";
 import cl from "../style.module.css";
+import { useEffect } from "react";
 
 export const ThemeCganger = () => {
   const { theme, setTheme } = useTheme();
+  useEffect(() => {
+    console.log(theme);
+  }, [theme]);
   return (
     <div className={cl.themeChangeContainer}>
       <button className={cl.themeChangeBtn} onClick={() => setTheme("dark")}>
