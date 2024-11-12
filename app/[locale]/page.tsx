@@ -6,11 +6,14 @@ export default function Home() {
   return (
     <div>
       <TopBanner />
+      {/* <p>Специалисты: </p> */}
       <div className={cl.content}>
         <div className={cl.categories}>
           <CategoryList />
         </div>
-        <ExecutorList />
+        <div className={cl.users}>
+          <ExecutorList />
+        </div>
       </div>
     </div>
   );

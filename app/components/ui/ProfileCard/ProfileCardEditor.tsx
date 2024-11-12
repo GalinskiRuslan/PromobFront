@@ -21,6 +21,7 @@ import {
 } from "@/app/store/slices/appSlice";
 import { userComments, userStatistic } from "@/app/store/slices/userSlice";
 import { useTheme } from "next-themes";
+import StarRating from "../Raiting/Raiting";
 
 interface Props {
   user: IUser;
@@ -30,6 +31,7 @@ export const ProfileCardEditor = ({ user }: Props) => {
   const { cities } = useSelector((state: any) => state.city);
   const { theme } = useTheme();
   const [statistic, setStatistic] = useState<any>(null);
+  const [rating, setRating] = useState<any>(0);
   const [comments, setComments] = useState<any>(null);
   const dispatch = useDispatch<AppDispatch>();
 
@@ -59,9 +61,15 @@ export const ProfileCardEditor = ({ user }: Props) => {
       <div className={cl.leftBlock}>
         <ProfilePictureUploader />
         <div className={cl.profileName}>
-          <p className={cl.name}>
-            {user.surname} {user.name} {user.surname_2}
-          </p>
+          {user.nickname_true ? (
+            <p className={cl.name}>
+              {user.nickname} ({user.name})
+            </p>
+          ) : (
+            <p className={cl.name}>
+              {user.surname} {user.name} {user.surname_2}
+            </p>
+          )}
           <div className={cl.city}>
             <Image alt="map" src={theme == "dark" ? srcW : src} />
             {cities?.find((city: any) => city.id == user?.cities_id)?.city}
@@ -77,6 +85,7 @@ export const ProfileCardEditor = ({ user }: Props) => {
           <Image alt="map" src={theme === "dark" ? src2White : src2} />
           <p>Статистика</p>
         </button>
+        <StarRating maxStars={5} onChange={setRating} />
       </div>
     </div>
   );

@@ -43,4 +43,5 @@
   cursor: pointer;
   font-size: 28px;
   font-weight: 700;
+  z-index: 999;
 }

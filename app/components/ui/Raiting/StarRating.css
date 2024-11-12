@@ -1,0 +1,18 @@
+.star-rating {
+  font-size: 30px;
+  color: gray; /* Цвет пустой звезды */
+  cursor: pointer;
+  user-select: none;
+}
+
+.star {
+  transition: color 0.2s ease;
+}
+
+.star.filled {
+  color: gold; /* Цвет для заполненной звезды */
+}
+
+.star:hover {
+  color: orange; /* Цвет для звезды при наведении */
+}

@@ -23,7 +23,7 @@ export interface IUser {
   about_yourself: string;
   language: Array<string>;
   photos: string;
-  gallery: Array<string>;
+  gallery: any;
   role: string;
   is_verified: number;
   created_at: string;

@@ -279,7 +279,7 @@
   }
   .rightItems {
     position: absolute;
-    right: -100%;
+    right: -200%;
     transition: 0.5s;
   }
   .rightItems_open {

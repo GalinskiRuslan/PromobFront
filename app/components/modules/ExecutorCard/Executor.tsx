@@ -14,6 +14,7 @@ import whatsAppSrc from "./assets/icons8-whatsapp-32.png";
 import instaSrc from "./assets/icons8-instagram-50.png";
 import telSrc from "./assets/icons8-телефон-50.png";
 import { Link } from "@/langs";
+import { Portfolio } from "../../ui/Portfolio/Portfolio";
 type Props = {
   user: IUser;
 };
@@ -74,6 +75,7 @@ const Executor = ({ user }: Props) => {
           </div>
         </div>
       </div>
+      <Portfolio portfolio={user.gallery ? JSON.parse(user.gallery) : []} />
       <Modal visible={isOpen} setVisible={setIsOpen}>
         <p className={cl.contactsTitle}> Контакты</p>
         <a

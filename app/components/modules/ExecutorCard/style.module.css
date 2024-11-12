@@ -12,6 +12,7 @@
 .headContent {
   display: flex;
   justify-content: space-between;
+  margin-bottom: 30px;
 }
 .nick {
   font-size: 20px;
@@ -47,8 +48,7 @@
   font-weight: 700;
   font-size: 18px;
   border: 1px solid #9161df;
-  max-width: 480px;
-  width: 100%;
+  width: 220px;
   margin-top: 20px;
 }
 .contactsTitle {
@@ -74,3 +74,4 @@
   text-decoration: none;
   font-weight: 700;
 }
+
