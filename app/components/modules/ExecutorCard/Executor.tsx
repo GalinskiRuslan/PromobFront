@@ -13,6 +13,7 @@ import siteSrc from "./assets/icons8-сайт-50.png";
 import whatsAppSrc from "./assets/icons8-whatsapp-32.png";
 import instaSrc from "./assets/icons8-instagram-50.png";
 import telSrc from "./assets/icons8-телефон-50.png";
+import { Link } from "@/langs";
 type Props = {
   user: IUser;
 };
@@ -54,9 +55,9 @@ const Executor = ({ user }: Props) => {
             )}
             <div className={cl.mapCont}>
               <Image alt="map" src={mapPin} />
-              <p className={cl.city}>
+              <Link href={`/city/${user.cities_id}`} className={cl.city}>
                 {cities?.find((city: any) => city.id == user.cities_id)?.city}
-              </p>
+              </Link>
             </div>
             <button className={cl.contactsBtn} onClick={() => setIsOpen(true)}>
               Контакты

@@ -65,7 +65,12 @@
   cursor: pointer;
   font-size: 18px;
   text-decoration: none;
-  color: #474646;
+  color: var(--themecolor);
   justify-content: center;
   padding: 15px 0;
+}
+.city {
+  color: #7e7c7c;
+  text-decoration: none;
+  font-weight: 700;
 }

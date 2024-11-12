@@ -57,6 +57,7 @@ export const CategoryList = (props: Props) => {
       getAllCategoriesLoc();
     }
   }, [pathName]);
+
   return (
     <div className={cl.container}>
       <ul className={cl.list}>
@@ -65,7 +66,7 @@ export const CategoryList = (props: Props) => {
             key={category.id}
             href={`?category=${category.id}`}
             className={
-              searchParams.get("category") === category.alias
+              searchParams.get("category") === category.id.toString()
                 ? cl.listLinkActive
                 : cl.listLink
             }
