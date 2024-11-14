@@ -71,10 +71,18 @@ export const ExecutorList = (props: Props) => {
   useEffect(() => {
     if (searchParams.get("category")) {
       getUsersWithCategory();
+      setCurrentPage(1);
     } else {
       getUsers();
     }
-  }, [searchParams, currentPage]);
+  }, [searchParams]);
+  useEffect(() => {
+    if (searchParams.get("category")) {
+      getUsersWithCategory();
+    } else {
+      getUsers();
+    }
+  }, [currentPage]);
   if (users?.length < 1)
     return <p className={cl.dangertext}>Увы, пока нет похожиш специалистов.</p>;
   return (
