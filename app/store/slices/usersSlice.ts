@@ -39,6 +39,17 @@ export const getAllUsersWihtCategory = createAsyncThunk(
     }
   }
 );
+export const getUserInfoById = createAsyncThunk(
+  "getUserInfoById",
+  async ({ id }: { id: number }, { rejectWithValue }) => {
+    try {
+      const response = await $axios.get<any>(`/getUserById?id=${id}`);
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);
 
 export const usersSlice = createSlice({
   name: "users",

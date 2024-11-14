@@ -18,6 +18,7 @@ import { Portfolio } from "../../ui/Portfolio/Portfolio";
 import { AppDispatch } from "@/app/store/store";
 import { addContactsViewCount } from "@/app/store/slices/userSlice";
 import StarRating from "../../ui/Raiting/Raiting";
+import moneySrc from "./assets/Component 3.png";
 type Props = {
   user: IUser;
 };
@@ -45,32 +46,34 @@ const Executor = ({ user }: Props) => {
     <div className={cl.executor}>
       <div className={cl.headContent}>
         <div className={cl.leftContent}>
-          {user.photos ? (
-            <Image
-              alt="photo"
-              src={user.photos}
-              width={150}
-              height={150}
-              className={cl.img}
-            />
-          ) : (
-            <Image
-              alt="nophoto"
-              src={nophoto}
-              width={150}
-              height={150}
-              className={cl.img}
-            />
-          )}
+          <Link href={`/profile/${user.id}`} className={cl.nick}>
+            {user.photos ? (
+              <Image
+                alt="photo"
+                src={user.photos}
+                width={150}
+                height={150}
+                className={cl.img}
+              />
+            ) : (
+              <Image
+                alt="nophoto"
+                src={nophoto}
+                width={150}
+                height={150}
+                className={cl.img}
+              />
+            )}
+          </Link>
           <div className={cl.secondTop}>
             {user.nickname_true ? (
-              <p className={cl.nick}>
+              <Link href={`/profile/${user.id}`} className={cl.nick}>
                 {user.nickname} ({user.name})
-              </p>
+              </Link>
             ) : (
-              <p className={cl.nick}>
+              <Link href={`/profile/${user.id}`} className={cl.nick}>
                 {user.name} {user.surname_2}
-              </p>
+              </Link>
             )}
             <div className={cl.mapCont}>
               <Image alt="map" src={mapPin} />
@@ -117,6 +120,12 @@ const Executor = ({ user }: Props) => {
             </Link>
           );
         })}
+      </div>
+      <div className={cl.cost}>
+        <Image alt="money" src={moneySrc} />
+        <p className={cl.costTitle}>Стоимость услуг специалиста</p>
+        <p className={cl.costText}>от {user.cost_from} ₸</p>
+        <p className={cl.costText}>до {user.cost_up} ₸</p>
       </div>
       <Modal visible={isOpen} setVisible={setIsOpen}>
         <p className={cl.contactsTitle}> Контакты</p>
