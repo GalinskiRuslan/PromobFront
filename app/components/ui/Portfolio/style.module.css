@@ -42,7 +42,7 @@
   background-color: #8a47d4; /* Slightly darker purple on hover */
 }
 .nextBtn {
-  position: absolute;
+  position: fixed;
   top: 50%;
   right: 20px;
   width: 60px;
@@ -59,13 +59,13 @@
   display: block;
   width: 50px;
   height: 50px;
-  border-top: 4px solid #9161df;
-  border-right: 4px solid #9161df;
+  border-top: 4px solid #b587ff;
+  border-right: 4px solid #b587ff;
   transform: rotate(45deg);
   margin: auto;
 }
 .prevBtn {
-  position: absolute;
+  position: fixed;
   top: 50%;
   left: 20px;
   width: 60px;
@@ -82,8 +82,8 @@
   display: block;
   width: 50px;
   height: 50px;
-  border-top: 4px solid #9161df;
-  border-right: 4px solid #9161df;
+  border-top: 4px solid #b587ff;
+  border-right: 4px solid #b587ff;
   transform: rotate(-135deg);
   margin: auto;
 }

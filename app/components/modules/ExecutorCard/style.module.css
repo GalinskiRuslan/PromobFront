@@ -75,3 +75,11 @@
   font-weight: 700;
 }
 
+@media screen and (max-width: 720px) {
+  .leftContent {
+    flex-wrap: wrap;
+  }
+  .headContent {
+    flex-wrap: wrap;
+  }
+}

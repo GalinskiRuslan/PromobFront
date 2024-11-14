@@ -13,6 +13,18 @@ const nextConfig = {
         port: "",
         pathname: "**",
       },
+      {
+        protocol: "https",
+        hostname: "promobilograf.kz",
+        port: "",
+        pathname: "**",
+      },
+      {
+        protocol: "https",
+        hostname: "dspt7sohnkg6q.cloudfront.net",
+        port: "",
+        pathname: "**",
+      },
     ],
   },
 };

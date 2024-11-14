@@ -78,30 +78,36 @@ const Executor = ({ user }: Props) => {
       <Portfolio portfolio={user.gallery ? JSON.parse(user.gallery) : []} />
       <Modal visible={isOpen} setVisible={setIsOpen}>
         <p className={cl.contactsTitle}> Контакты</p>
-        <a
-          target="_blank"
-          href={`https://wa.me/${user.whatsapp?.replace(/\D/g, "")}`}
-          className={cl.linkContacts}
-        >
-          <Image alt="site" src={whatsAppSrc} width={30} height={30} />
-          <p>{user.whatsapp}</p>
-        </a>
-        <a
-          href={`https://${user.site}`}
-          className={cl.linkContacts}
-          target="_blank"
-        >
-          <Image alt="site" src={siteSrc} width={30} height={30} />
-          <p>{user.site}</p>
-        </a>
-        <a
-          href={`https://instagram.com/${user.site}`}
-          className={cl.linkContacts}
-          target="_blank"
-        >
-          <Image alt="site" src={instaSrc} width={30} height={30} />
-          <p>{user.instagram}</p>
-        </a>
+        {user.whatsapp && (
+          <a
+            target="_blank"
+            href={`https://wa.me/${user.whatsapp?.replace(/\D/g, "")}`}
+            className={cl.linkContacts}
+          >
+            <Image alt="site" src={whatsAppSrc} width={30} height={30} />
+            <p>{user.whatsapp}</p>
+          </a>
+        )}
+        {user.site && (
+          <a
+            href={`https://${user.site}`}
+            className={cl.linkContacts}
+            target="_blank"
+          >
+            <Image alt="site" src={siteSrc} width={30} height={30} />
+            <p>{user.site}</p>
+          </a>
+        )}
+        {user.instagram && (
+          <a
+            href={`https://instagram.com/${user.site}`}
+            className={cl.linkContacts}
+            target="_blank"
+          >
+            <Image alt="site" src={instaSrc} width={30} height={30} />
+            <p>{user.instagram}</p>
+          </a>
+        )}
         <a href={`tel:${user.tel}`} className={cl.linkContacts} target="_blank">
           <Image alt="site" src={telSrc} width={30} height={30} />
           <p>{user.tel}</p>

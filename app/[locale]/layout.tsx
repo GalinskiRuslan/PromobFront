@@ -11,7 +11,7 @@ import { Loader } from "../components/modules/Loader/Loader";
 import { Footer } from "../components/modules/layouts/Footer/Footer";
 
 export const metadata: Metadata = {
-  title: "Promobilograf",
+  title: "PROmobilograf",
   description: "Платформа №1 для медиа-профессионалов в Казахстане",
 };
 
