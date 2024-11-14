@@ -8,6 +8,9 @@
   height: 224px;
   position: relative;
   cursor: pointer;
+  display: flex;
+  border: 1px solid #ccc;
+  border-radius: 24px;
 }
 .video {
   position: absolute;
