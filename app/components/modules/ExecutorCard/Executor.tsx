@@ -2,7 +2,7 @@ import { IUser } from "@/app/types";
 import cl from "./style.module.css";
 import Image from "next/image";
 import mapPin from "./assets/map pin.png";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import messageSrc from "./assets/Vector.png";
 import datkmessageSrc from "./assets/Vectordark.png";
 import { useTheme } from "next-themes";
@@ -15,14 +15,32 @@ import instaSrc from "./assets/icons8-instagram-50.png";
 import telSrc from "./assets/icons8-телефон-50.png";
 import { Link } from "@/langs";
 import { Portfolio } from "../../ui/Portfolio/Portfolio";
+import { AppDispatch } from "@/app/store/store";
+import { addContactsViewCount } from "@/app/store/slices/userSlice";
+import StarRating from "../../ui/Raiting/Raiting";
 type Props = {
   user: IUser;
 };
 
 const Executor = ({ user }: Props) => {
   const { cities } = useSelector((state: any) => state.city);
+  const { categories } = useSelector((state: any) => state.categories);
   const { theme } = useTheme();
   const [isOpen, setIsOpen] = useState(false);
+  const [rating, setRating] = useState<any>(0);
+  const dispatch = useDispatch<AppDispatch>();
+  const addViewStatic = async (user_id: number) => {
+    setIsOpen(true);
+    try {
+      const response = await dispatch(
+        addContactsViewCount({
+          user_id,
+        })
+      ).unwrap();
+    } catch (error: any) {
+      console.log(error);
+    }
+  };
   return (
     <div className={cl.executor}>
       <div className={cl.headContent}>
@@ -60,7 +78,10 @@ const Executor = ({ user }: Props) => {
                 {cities?.find((city: any) => city.id == user.cities_id)?.city}
               </Link>
             </div>
-            <button className={cl.contactsBtn} onClick={() => setIsOpen(true)}>
+            <button
+              className={cl.contactsBtn}
+              onClick={() => addViewStatic(user.id)}
+            >
               Контакты
             </button>
           </div>
@@ -73,9 +94,22 @@ const Executor = ({ user }: Props) => {
             />
             {user.comments?.length} отзывов
           </div>
+          Рейтинг пользователя
+          <StarRating maxStars={5} onChange={setRating} />
         </div>
       </div>
       <Portfolio portfolio={user.gallery ? JSON.parse(user.gallery) : []} />
+      <div className={cl.categories}>
+        {JSON.parse(user.categories_id)?.map((item: any) => {
+          return (
+            <Link key={item} href={`?category=${item}`}>
+              <button className={cl.cat} key={item}>
+                {categories?.find((cat: any) => cat.id == item)?.category}
+              </button>
+            </Link>
+          );
+        })}
+      </div>
       <Modal visible={isOpen} setVisible={setIsOpen}>
         <p className={cl.contactsTitle}> Контакты</p>
         {user.whatsapp && (

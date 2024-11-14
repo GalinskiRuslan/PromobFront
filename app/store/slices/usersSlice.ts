@@ -5,9 +5,14 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 export const getAllUsers = createAsyncThunk(
   "userComments",
-  async (_, { rejectWithValue }) => {
+  async (
+    { perPage, page }: { perPage: number; page: number },
+    { rejectWithValue }
+  ) => {
     try {
-      const response = await $axios.get<any>(`/getAllUsers`);
+      const response = await $axios.get<any>(
+        `/getUsersWithPagination?per_page=${perPage}&page=${page}`
+      );
       return response.data;
     } catch (error) {
       return rejectWithValue(error);
@@ -16,10 +21,17 @@ export const getAllUsers = createAsyncThunk(
 );
 export const getAllUsersWihtCategory = createAsyncThunk(
   "userComments",
-  async ({ category_id }: { category_id: number }, { rejectWithValue }) => {
+  async (
+    {
+      category_id,
+      perPage,
+      page,
+    }: { category_id: number; perPage: number; page: number },
+    { rejectWithValue }
+  ) => {
     try {
       const response = await $axios.get<any>(
-        `/getUsersWithCategory?category=${category_id}`
+        `/getUsersWithCategory?category=${category_id}&per_page=${perPage}&page=${page}`
       );
       return response.data;
     } catch (error) {

@@ -1,0 +1,81 @@
+.pagination {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 40px;
+  gap: 5px;
+}
+.btnNext {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+.btnNext::before {
+  content: " ";
+  display: block;
+  width: 20px;
+  height: 20px;
+  border-top: 3px solid #b587ff;
+  border-right: 3px solid #b587ff;
+  transform: rotate(45deg);
+  margin: auto;
+}
+.btnNext:disabled::before {
+  content: " ";
+  display: block;
+  width: 20px;
+  height: 20px;
+  border-top: 3px solid #ccc;
+  border-right: 3px solid #ccc;
+  transform: rotate(45deg);
+  margin: auto;
+}
+.btnPrev {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+.btnPrev::before {
+  content: " ";
+  display: block;
+  width: 20px;
+  height: 20px;
+  border-top: 3px solid #b587ff;
+  border-right: 3px solid #b587ff;
+  transform: rotate(-135deg);
+  margin: auto;
+}
+.btnPrev:disabled::before {
+  content: " ";
+  display: block;
+  width: 20px;
+  height: 20px;
+  border-top: 3px solid #ccc;
+  border-right: 3px solid #ccc;
+  transform: rotate(-135deg);
+  margin: auto;
+}
+.pages {
+  display: flex;
+  gap: 5px;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  margin-top: 20px;
+  margin-bottom: 50px;
+  align-items: center;
+}
+.btnPage {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 18px;
+}
+.btnPage:disabled {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 18px;
+  color: #b587ff;
+}

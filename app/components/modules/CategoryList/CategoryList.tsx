@@ -3,6 +3,7 @@ import {
   serErrorMethod,
   setErrorCode,
   setErrorText,
+  setIsOpenModal,
   setVisibleLoader,
 } from "@/app/store/slices/appSlice";
 import cl from "./style.module.css";
@@ -30,6 +31,7 @@ export const CategoryList = (props: Props) => {
       dispatch(setVisibleLoader(false));
     } catch (error: any) {
       dispatch(setVisibleLoader(false));
+      dispatch(setIsOpenModal(true));
       dispatch(setErrorText(error.errorText));
       dispatch(serErrorMethod(error.method));
       dispatch(setErrorCode(error.status));
@@ -47,6 +49,7 @@ export const CategoryList = (props: Props) => {
       dispatch(setVisibleLoader(false));
       dispatch(setErrorText(error.errorText));
       dispatch(serErrorMethod(error.method));
+      dispatch(setIsOpenModal(true));
       dispatch(setErrorCode(error.status));
     }
   };

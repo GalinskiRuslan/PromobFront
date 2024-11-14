@@ -148,6 +148,20 @@ export const userComments = createAsyncThunk(
   }
 );
 
+export const addContactsViewCount = createAsyncThunk(
+  "addContactsViewCount",
+  async ({ user_id }: { user_id: number }, { rejectWithValue }) => {
+    try {
+      const response = await $axios.get<any>(
+        `/clickContacts?user_id=${user_id}`
+      );
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);
+
 export const userSlice = createSlice({
   name: "user",
   initialState: {

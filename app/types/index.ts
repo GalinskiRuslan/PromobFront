@@ -15,7 +15,7 @@ export interface IUser {
   site: string | null;
   instagram: string | null;
   whatsapp: string | null;
-  categories_id: Array<number>;
+  categories_id: any;
   cities_id: number;
   cost_from: number;
   cost_up: number;

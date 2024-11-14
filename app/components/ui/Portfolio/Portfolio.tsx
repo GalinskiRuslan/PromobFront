@@ -35,7 +35,11 @@ export const Portfolio = ({ portfolio }: Props) => {
         portfolio.map((item, i) => {
           const isVideo = /\.(mp4|webm|mov)(\?|#|$)/i.test(item);
           return isVideo ? (
-            <div className={cl.img_container} onClick={() => openImage(i)}>
+            <div
+              className={cl.img_container}
+              onClick={() => openImage(i)}
+              key={i}
+            >
               <Image
                 alt="item"
                 className={cl.img}
@@ -54,7 +58,11 @@ export const Portfolio = ({ portfolio }: Props) => {
               />
             </div>
           ) : (
-            <div className={cl.img_container} onClick={() => openImage(i)}>
+            <div
+              className={cl.img_container}
+              onClick={() => openImage(i)}
+              key={i}
+            >
               <Image
                 alt="photo"
                 src={item}

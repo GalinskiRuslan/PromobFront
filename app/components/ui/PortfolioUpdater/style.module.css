@@ -13,6 +13,8 @@
 }
 .itemCont {
   position: relative;
+  width: 224px;
+  height: 224px;
 }
 .deleteBtn {
   position: absolute;

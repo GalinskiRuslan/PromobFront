@@ -37,6 +37,7 @@
   display: flex;
   align-items: center;
   gap: 15px;
+  margin-bottom: 20px;
 }
 .contactsBtn {
   cursor: pointer;
@@ -74,6 +75,29 @@
   text-decoration: none;
   font-weight: 700;
 }
+.categories {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-top: 20px;
+}
+.cat {
+  cursor: pointer;
+  background: #9161df;
+  border-radius: 8px;
+  padding: 10px 20px;
+  transition: 0.5s;
+  font-weight: 700;
+  font-size: 18px;
+  border: 1px solid #9161df;
+  transition: 0.5s;
+}
+.cat:hover {
+  transition: 0.5s;
+  color: #9161df;
+  border: 1px solid #9161df;
+  background: transparent;
+}
 
 @media screen and (max-width: 720px) {
   .leftContent {
@@ -81,5 +105,24 @@
   }
   .headContent {
     flex-wrap: wrap;
+  }
+  .nick {
+    font-size: 16px;
+    font-weight: 700;
+  }
+  .city {
+    font-size: 14px;
+  }
+  .contactsBtn {
+    width: 135px;
+    font-size: 14px;
+  }
+  .img {
+    width: 100px;
+    height: 100px;
+  }
+  .executor {
+    margin-bottom: 20px;
+    padding: 15px;
   }
 }
