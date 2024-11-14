@@ -98,7 +98,15 @@ const Executor = ({ user }: Props) => {
           <StarRating maxStars={5} onChange={setRating} />
         </div>
       </div>
-      <Portfolio portfolio={user.gallery ? JSON.parse(user.gallery) : []} />
+      <Portfolio
+        portfolio={
+          !user.gallery
+            ? []
+            : Array.isArray(JSON.parse(user.gallery))
+            ? JSON.parse(user.gallery)
+            : Object.values(JSON.parse(user.gallery))
+        }
+      />
       <div className={cl.categories}>
         {JSON.parse(user.categories_id)?.map((item: any) => {
           return (
