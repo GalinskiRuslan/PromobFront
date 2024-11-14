@@ -3,7 +3,7 @@ import axios from "axios";
 const $axios = axios.create({
   baseURL:
     process.env.NODE_ENV === "production"
-      ? "https://promobilograf.kz/"
+      ? "https://promobilograf.kz/api/"
       : "http://127.0.0.1:8000/api/",
 });
 
