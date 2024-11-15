@@ -20,10 +20,12 @@ import siteSrc from "./assets/icons8-сайт-50.png";
 import whatsAppSrc from "./assets/icons8-whatsapp-32.png";
 import instaSrc from "./assets/icons8-instagram-50.png";
 import telSrc from "./assets/icons8-телефон-50.png";
+import money from "./assets/Component 3.png";
 import { useTheme } from "next-themes";
 import datkmessageSrc from "./assets/Vectordark.png";
 import StarRating from "../../ui/Raiting/Raiting";
 import { getAllCategories } from "@/app/store/slices/categories";
+import { IUser } from "@/app/types";
 
 type Props = { user_id: number };
 
@@ -31,7 +33,7 @@ export const UserInfo = (props: Props) => {
   const dispatch = useDispatch<AppDispatch>();
   const { cities } = useSelector((state: any) => state.city);
   const { categories } = useSelector((state: any) => state.categories);
-  const [user, setUser] = useState<any>(null);
+  const [user, setUser] = useState<IUser | null>(null);
   const [isOpen, setIsOpen] = useState(false);
   const [rating, setRating] = useState<any>(0);
   const { theme } = useTheme();
@@ -137,6 +139,17 @@ export const UserInfo = (props: Props) => {
               </Link>
             );
           })}
+        </div>
+        <div className={cl.cardAbout}>
+          <div className={cl.costContainer}>
+            <Image src={money} alt="money" />
+            <div>
+              <p className={cl.cost}>стоимость</p>
+              <p className={cl.costBold}>
+                От {user.cost_from} ₸ До {user.cost_up} ₸
+              </p>
+            </div>
+          </div>
         </div>
         <Modal visible={isOpen} setVisible={setIsOpen}>
           <p className={cl.contactsTitle}> Контакты</p>

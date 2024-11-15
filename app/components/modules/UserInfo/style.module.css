@@ -108,26 +108,29 @@
   border: 1px solid #9161df;
   background: transparent;
 }
-.cost {
-  width: 100%;
-  background: #fff;
-  border-radius: 16px;
-  margin-top: 20px;
-  padding: 15px;
+.cardAbout {
   display: flex;
-  gap: 20px;
-  align-items: center;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-top: 80px;
+  background: #fbf3fe;
+  border-radius: 24px;
+  padding: 20px;
   flex-wrap: wrap;
 }
-.costTitle {
-  font-size: 18px;
-  font-weight: 700;
-  color: #111;
+.cost {
+  font-size: 22px;
+  color: #7e7c7c;
 }
-.costText {
-  font-size: 16px;
+.costContainer {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+.costBold {
   font-weight: 700;
-  color: #9161df;
+  font-size: 26px;
+  color: #111;
 }
 @media screen and (max-width: 720px) {
   .leftContent {

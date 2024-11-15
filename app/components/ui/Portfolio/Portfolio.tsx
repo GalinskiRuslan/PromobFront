@@ -73,7 +73,7 @@ export const Portfolio = ({ portfolio }: Props) => {
             </div>
           );
         })}
-      <Modal visible={visible} setVisible={setVisible}>
+      <Modal visible={visible} setVisible={setVisible} isNeedPadding={true}>
         {/\.(mp4|webm|mov)(\?|#|$)/i.test(portfolio[currentIndex]) ? (
           <video
             key={portfolio[currentIndex]}

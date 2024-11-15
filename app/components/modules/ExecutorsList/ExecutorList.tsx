@@ -12,7 +12,7 @@ import {
   getAllUsersWihtCategory,
 } from "@/app/store/slices/usersSlice";
 import { AppDispatch } from "@/app/store/store";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import Executor from "../ExecutorCard/Executor";
 import cl from "./style.module.css";
@@ -26,6 +26,7 @@ export const ExecutorList = (props: Props) => {
   const [users, setUsers] = useState<any>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
+  const refAnchor = useRef<HTMLSpanElement | null>(null);
   const dispatch = useDispatch<AppDispatch>();
   const getUsers = async () => {
     dispatch(setVisibleLoader(true));
@@ -83,10 +84,17 @@ export const ExecutorList = (props: Props) => {
       getUsers();
     }
   }, [currentPage]);
+  useEffect(() => {
+    if (refAnchor.current) {
+      refAnchor.current.scrollIntoView({ behavior: "smooth" });
+      refAnchor.current.focus();
+    }
+  }, [currentPage]);
   if (users?.length < 1)
     return <p className={cl.dangertext}>Увы, пока нет похожиш специалистов.</p>;
   return (
     <div className={cl.container}>
+      <span ref={refAnchor}></span>
       {users.map((user: any) => (
         <Executor user={user} key={user.id} />
       ))}
