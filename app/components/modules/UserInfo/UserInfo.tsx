@@ -263,7 +263,7 @@ export const UserInfo = (props: Props) => {
         </Modal>
         <Modal visible={commentEditor} setVisible={setCommentEditor}>
           <div className={cl.commentEditor}>
-            {user.role !== "client" && (
+            {user?.role !== "client" && (
               <p>Отзывы могут оставлять только клиенты</p>
             )}
           </div>
