@@ -26,6 +26,8 @@ import datkmessageSrc from "./assets/Vectordark.png";
 import StarRating from "../../ui/Raiting/Raiting";
 import { getAllCategories } from "@/app/store/slices/categories";
 import { IUser } from "@/app/types";
+import { Comment } from "../../ui/Comment/Comment";
+import dayjs from "dayjs";
 
 type Props = { user_id: number };
 
@@ -33,7 +35,8 @@ export const UserInfo = (props: Props) => {
   const dispatch = useDispatch<AppDispatch>();
   const { cities } = useSelector((state: any) => state.city);
   const { categories } = useSelector((state: any) => state.categories);
-  const [user, setUser] = useState<IUser | null>(null);
+  const { user } = useSelector((state: any) => state.auth);
+  const [userLocal, setUser] = useState<IUser | null>(null);
   const [isOpen, setIsOpen] = useState(false);
   const [rating, setRating] = useState<any>(0);
   const { theme } = useTheme();
@@ -85,36 +88,39 @@ export const UserInfo = (props: Props) => {
   }, []);
 
   return (
-    user && (
+    userLocal && (
       <div className={cl.container}>
         <div className={cl.topContCard}>
           <div className={cl.leftContent}>
             <Image
               alt="photo"
-              src={user.photos}
+              src={userLocal.photos}
               width={150}
               height={150}
               className={cl.img}
             />
             <div className={cl.secondTop}>
-              {user.nickname_true ? (
+              {userLocal.nickname_true ? (
                 <p className={cl.nick}>
-                  {user.nickname} ({user.name})
+                  {userLocal.nickname} ({userLocal.name})
                 </p>
               ) : (
                 <p className={cl.nick}>
-                  {user.name} {user.surname_2}
+                  {userLocal.name} {userLocal.surname_2}
                 </p>
               )}
               <div className={cl.mapCont}>
                 <Image alt="map" src={mapPin} />
-                <Link href={`/city/${user.cities_id}`} className={cl.city}>
-                  {cities?.find((city: any) => city.id == user.cities_id)?.city}
+                <Link href={`/city/${userLocal.cities_id}`} className={cl.city}>
+                  {
+                    cities?.find((city: any) => city.id == userLocal.cities_id)
+                      ?.city
+                  }
                 </Link>
               </div>
               <button
                 className={cl.contactsBtn}
-                onClick={() => addViewStatic(user.id)}
+                onClick={() => addViewStatic(userLocal.id)}
               >
                 Контакты
               </button>
@@ -123,14 +129,18 @@ export const UserInfo = (props: Props) => {
           <div className={cl.rightContent}>
             <div className={cl.commentBtn}>
               <Image alt="message" src={datkmessageSrc} />
-              {user.comments?.length} отзывов
+              {userLocal.comments?.length} отзывов
             </div>
             <p>Рейтинг пользователя</p>
-            <StarRating maxStars={5} onChange={setRating} />
+            <StarRating
+              maxStars={5}
+              onChange={setRating}
+              readOnly={user?.role === "client" ? false : true}
+            />
           </div>
         </div>
         <div className={cl.categories}>
-          {JSON.parse(user.categories_id)?.map((item: any) => {
+          {JSON.parse(userLocal.categories_id)?.map((item: any) => {
             return (
               <Link key={item} href={`?category=${item}`}>
                 <button className={cl.cat} key={item}>
@@ -146,50 +156,80 @@ export const UserInfo = (props: Props) => {
             <div>
               <p className={cl.cost}>стоимость</p>
               <p className={cl.costBold}>
-                От {user.cost_from} ₸ До {user.cost_up} ₸
+                От {userLocal.cost_from} ₸ До {userLocal.cost_up} ₸
               </p>
             </div>
           </div>
+          {userLocal.details && (
+            <div className={cl.aboutContainer}>
+              <p className={cl.costBold}>Детали работы</p>
+              <p>{userLocal.details}</p>
+            </div>
+          )}
+          {userLocal.about_yourself && (
+            <div className={cl.aboutContainer}>
+              <p className={cl.costBold}>Обо мне</p>
+              <p>{userLocal.about_yourself}</p>
+            </div>
+          )}
+        </div>
+        <div className={cl.commentsContainer} id="comments">
+          <div className={cl.comments}>
+            <p className={cl.commentsTitle}>
+              Отзывы ({userLocal.comments?.length})
+            </p>
+            <button className={cl.addcomentbtn}>Добавить отзыв</button>
+          </div>
+          {userLocal.comments?.map((item: any) => {
+            return (
+              <Comment
+                key={item.id}
+                user_id={item.target_user_id}
+                comment={item.result}
+                date={dayjs(item.created_at).format("MM.DD.YYYY")}
+              />
+            );
+          })}
         </div>
         <Modal visible={isOpen} setVisible={setIsOpen}>
           <p className={cl.contactsTitle}> Контакты</p>
-          {user.whatsapp && (
+          {userLocal.whatsapp && (
             <a
               target="_blank"
-              href={`https://wa.me/${user.whatsapp?.replace(/\D/g, "")}`}
+              href={`https://wa.me/${userLocal.whatsapp?.replace(/\D/g, "")}`}
               className={cl.linkContacts}
             >
               <Image alt="site" src={whatsAppSrc} width={30} height={30} />
-              <p>{user.whatsapp}</p>
+              <p>{userLocal.whatsapp}</p>
             </a>
           )}
-          {user.site && (
+          {userLocal.site && (
             <a
-              href={`https://${user.site}`}
+              href={`https://${userLocal.site}`}
               className={cl.linkContacts}
               target="_blank"
             >
               <Image alt="site" src={siteSrc} width={30} height={30} />
-              <p>{user.site}</p>
+              <p>{userLocal.site}</p>
             </a>
           )}
-          {user.instagram && (
+          {userLocal.instagram && (
             <a
-              href={`https://instagram.com/${user.site}`}
+              href={`https://instagram.com/${userLocal.site}`}
               className={cl.linkContacts}
               target="_blank"
             >
               <Image alt="site" src={instaSrc} width={30} height={30} />
-              <p>{user.instagram}</p>
+              <p>{userLocal.instagram}</p>
             </a>
           )}
           <a
-            href={`tel:${user.tel}`}
+            href={`tel:${userLocal.tel}`}
             className={cl.linkContacts}
             target="_blank"
           >
             <Image alt="site" src={telSrc} width={30} height={30} />
-            <p>{user.tel}</p>
+            <p>{userLocal.tel}</p>
           </a>
         </Modal>
       </div>

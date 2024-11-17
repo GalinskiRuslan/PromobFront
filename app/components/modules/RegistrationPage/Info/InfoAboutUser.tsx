@@ -75,7 +75,9 @@ export const InfoAboutUser = ({ isRegister = true }: Props) => {
       ).unwrap();
       await dispatch(getUserInfo()).unwrap();
       dispatch(setVisibleLoader(false));
-      router.push("/registration/profile");
+      isRegister
+        ? router.push("/registration/profile")
+        : router.push("/profile");
     } catch (error: any) {
       dispatch(setVisibleLoader(false));
       dispatch(setIsOpenModal(true));

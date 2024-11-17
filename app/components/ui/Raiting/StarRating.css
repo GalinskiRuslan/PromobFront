@@ -12,7 +12,12 @@
 .star.filled {
   color: gold; /* Цвет для заполненной звезды */
 }
-
+.star1 {
+  transition: color 0.2s ease;
+}
+.star1.filled {
+  color: gold; /* Цвет для заполненной звезды */
+}
 .star:hover {
   color: orange; /* Цвет для звезды при наведении */
 }

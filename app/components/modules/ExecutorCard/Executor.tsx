@@ -98,7 +98,12 @@ const Executor = ({ user }: Props) => {
             {user.comments?.length} отзывов
           </div>
           Рейтинг пользователя
-          <StarRating maxStars={5} onChange={setRating} />
+          <StarRating
+            maxStars={5}
+            onChange={setRating}
+            readOnly={true}
+            value={5}
+          />
         </div>
       </div>
       <Portfolio

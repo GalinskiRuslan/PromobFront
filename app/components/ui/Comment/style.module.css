@@ -1,0 +1,41 @@
+.container {
+  display: flex;
+  gap: 25px;
+  margin-top: 80px;
+  background: #fbf3fe;
+  border-radius: 24px;
+  padding: 20px;
+  flex-wrap: wrap;
+}
+.rightContent {
+  flex-grow: 1;
+}
+.topContent {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+.photo {
+  border-radius: 50%;
+  object-fit: cover;
+}
+.name {
+  font-size: 20px;
+  font-weight: 700;
+  text-decoration: none;
+  color: #111;
+}
+.date {
+  font-size: 16px;
+  color: #111;
+  opacity: 0.5;
+}
+.comment {
+  flex-grow: 1; /* Комментарий занимает доступное место */
+  margin-top: 1rem;
+}
+.name {
+  font-size: 24px;
+  font-weight: 700;
+}

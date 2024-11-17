@@ -21,18 +21,12 @@ const Modal = ({
     rootClasses.push(cl.active);
     // lock();
   }
-  useEffect(() => {
-    if (visible) {
-      lock();
-    } else {
-      unlock();
-    }
-    // Очистка эффекта при размонтировании компонента
-    return () => unlock();
-  }, [visible, lock, unlock]);
   if (visible) {
     return (
       <div className={rootClasses.join(" ")} onClick={() => setVisible(false)}>
+        <button className={cl.closeBtn} onClick={() => setVisible(false)}>
+          ×
+        </button>
         <div
           className={cl.content}
           {...(isNeedPadding
@@ -46,9 +40,6 @@ const Modal = ({
             : {})}
           onClick={(event) => event.stopPropagation()}
         >
-          <button className={cl.closeBtn} onClick={() => setVisible(false)}>
-            ×
-          </button>
           {children}
         </div>
       </div>

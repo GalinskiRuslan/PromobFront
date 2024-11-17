@@ -57,10 +57,11 @@ export const registerWithEmail = createAsyncThunk(
     { rejectWithValue }
   ) => {
     try {
-      const response = await $axios.post<string>(`/registerWithEmail`, {
+      const response = await $axios.post<any>(`/registerWithEmail`, {
         email,
         password,
       });
+      localStorage.setItem("token", response.data.token);
       return response.data;
     } catch (error) {
       return rejectWithValue(error);
@@ -95,6 +96,7 @@ export const loginWithEmail = createAsyncThunk(
         email,
         password,
       });
+      localStorage.setItem("token", response.data.token);
       return response.data;
     } catch (error) {
       return rejectWithValue(error);

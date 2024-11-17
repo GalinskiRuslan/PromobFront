@@ -1,31 +1,41 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./StarRating.css"; // Для стилей, чтобы менять цвет
 
 interface Props {
   maxStars?: number;
   onChange: (rating: number) => void;
+  readOnly?: boolean;
+  value?: number;
 }
 
-const StarRating = ({ maxStars = 5, onChange }: Props) => {
-  const [rating, setRating] = useState(0); // Текущий рейтинг
-  const [hoveredRating, setHoveredRating] = useState(0); // Рейтинг при наведении
+const StarRating = ({
+  maxStars = 5,
+  onChange,
+  readOnly = false,
+  value,
+}: Props) => {
+  const [rating, setRating] = useState(0);
+  const [hoveredRating, setHoveredRating] = useState(0);
 
-  // Обработчик изменения рейтинга
   const handleClick = (index: any) => {
+    if (readOnly) return;
     setRating(index);
-    onChange(index); // Вызов внешней функции для получения нового рейтинга
+    onChange(index);
   };
 
-  // Обработчик для наведения мышки
   const handleMouseEnter = (index: any) => {
+    if (readOnly) return;
     setHoveredRating(index);
   };
 
-  // Обработчик, когда мышка покидает область
   const handleMouseLeave = () => {
+    if (readOnly) return;
     setHoveredRating(0);
   };
+  useEffect(() => {
+    setRating(value ? value : 0);
+  }, [value]);
 
   // Создание массива звезд
   const stars = [];
@@ -33,10 +43,15 @@ const StarRating = ({ maxStars = 5, onChange }: Props) => {
     stars.push(
       <span
         key={i}
-        className={`star ${i <= (hoveredRating || rating) ? "filled" : ""}`}
+        className={
+          readOnly
+            ? `star1 ${i <= (hoveredRating || rating) ? "filled" : ""}`
+            : `star ${i <= (hoveredRating || rating) ? "filled" : ""}`
+        }
         onClick={() => handleClick(i)}
         onMouseEnter={() => handleMouseEnter(i)}
         onMouseLeave={handleMouseLeave}
+        style={{ cursor: readOnly ? "default" : "pointer" }}
       >
         ★
       </span>

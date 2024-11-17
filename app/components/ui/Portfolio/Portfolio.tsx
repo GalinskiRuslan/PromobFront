@@ -2,7 +2,7 @@ import cl from "./style.module.css";
 import Image from "next/image";
 import videoSrc from "./assets/Group 208.png";
 import Modal from "../modal/Modal";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 
 type Props = {
   portfolio: Array<string>;
@@ -11,6 +11,7 @@ type Props = {
 export const Portfolio = ({ portfolio }: Props) => {
   const [visible, setVisible] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(-1);
+  const [isRendered, setIsRendered] = useState(false);
   const openImage = (index: number) => {
     setCurrentIndex(index);
     setVisible(true);
@@ -27,6 +28,9 @@ export const Portfolio = ({ portfolio }: Props) => {
       const newIndex = prevIndex === 0 ? portfolio.length - 1 : prevIndex - 1;
       return newIndex;
     });
+  };
+  const handleImageLoad = () => {
+    setIsRendered(true); // Установить статус, когда изображение загружено и отрендерено
   };
   useEffect(() => {}, [currentIndex]);
   return (
@@ -45,6 +49,11 @@ export const Portfolio = ({ portfolio }: Props) => {
                 className={cl.img}
                 width={224}
                 height={224}
+                blurDataURL={
+                  item
+                    .replace("/upload/", "/upload/so_auto,w_224,h_224,c_fill/")
+                    .replace(/\.(mp4|webm|mov)(\?|#|$)/, ".jpg?") + "?q=10"
+                }
                 src={item
                   .replace("/upload/", "/upload/so_auto,w_224,h_224,c_fill/")
                   .replace(/\.(mp4|webm|mov)(\?|#|$)/, ".jpg?")}
@@ -69,6 +78,7 @@ export const Portfolio = ({ portfolio }: Props) => {
                 width={224}
                 height={224}
                 className={cl.img}
+                blurDataURL={item + "?q=10"}
               />
             </div>
           );
@@ -87,7 +97,13 @@ export const Portfolio = ({ portfolio }: Props) => {
           <img
             src={portfolio[currentIndex]}
             alt="photo"
-            style={{ maxWidth: "100%", maxHeight: "80vh" }}
+            style={{
+              maxWidth: "100%",
+              maxHeight: "80vh",
+              opacity: isRendered ? 1 : 0,
+              transition: "opacity 0.5s ease-in-out",
+            }}
+            onLoad={handleImageLoad}
           />
         )}
         {portfolio.length > 1 && (
