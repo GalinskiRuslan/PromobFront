@@ -12,6 +12,7 @@ import darksrc3 from "./assets/Vector.png";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { AppDispatch } from "@/app/store/store";
+import { Comment } from "../Comment/Comment";
 import {
   serErrorMethod,
   setErrorCode,
@@ -22,6 +23,8 @@ import {
 import { userComments, userStatistic } from "@/app/store/slices/userSlice";
 import { useTheme } from "next-themes";
 import StarRating from "../Raiting/Raiting";
+import Modal from "../modal/Modal";
+import dayjs from "dayjs";
 
 interface Props {
   user: IUser;
@@ -31,6 +34,8 @@ export const ProfileCardEditor = ({ user }: Props) => {
   const { cities } = useSelector((state: any) => state.city);
   const { theme } = useTheme();
   const [statistic, setStatistic] = useState<any>(null);
+  const [isVisibleStatic, setIsVisibleStatic] = useState(false);
+  const [isVisibleComments, setIsVisibleComments] = useState(false);
   const [rating, setRating] = useState<any>(0);
   const [comments, setComments] = useState<any>(null);
   const dispatch = useDispatch<AppDispatch>();
@@ -40,8 +45,8 @@ export const ProfileCardEditor = ({ user }: Props) => {
     try {
       const response = await dispatch(userStatistic()).unwrap();
       const response2 = await dispatch(userComments()).unwrap();
-      setStatistic(response);
-      setComments(response2);
+      setStatistic(response.statistic);
+      setComments(response2.comments);
 
       dispatch(setVisibleLoader(false));
     } catch (error: any) {
@@ -77,16 +82,49 @@ export const ProfileCardEditor = ({ user }: Props) => {
         </div>
       </div>
       <div className={cl.rightBlock}>
-        <button className={cl.staticBlock}>
+        <button
+          className={cl.staticBlock}
+          onClick={() => setIsVisibleComments(!isVisibleComments)}
+        >
           <Image alt="map" src={theme === "dark" ? darksrc3 : src3} />
-          <p>{comments?.comments?.length}</p>
+          <p>{comments?.length}</p>
         </button>
-        <button className={cl.staticBlock}>
+        <button
+          className={cl.staticBlock}
+          onClick={() => setIsVisibleStatic(!isVisibleStatic)}
+        >
           <Image alt="map" src={theme === "dark" ? src2White : src2} />
           <p>Статистика</p>
         </button>
-        <StarRating maxStars={5} onChange={setRating} />
+        <StarRating maxStars={5} onChange={setRating} readOnly={true} />
       </div>
+      <Modal visible={isVisibleStatic} setVisible={setIsVisibleStatic}>
+        <p className={cl.title}>Статистика</p>
+        <p className={cl.statisticItem}>
+          Количество показов профиля:{" "}
+          <span className={cl.purpure}>{statistic?.view_count}</span>
+        </p>
+        <p className={cl.statisticItem}>
+          Количество просмотров контактов:{" "}
+          <span className={cl.purpure}>{statistic?.click_contacts}</span>
+        </p>
+        <p className={cl.statisticItem}>
+          Количество просмотров Профиля:{" "}
+          <span className={cl.purpure}>{statistic?.view_profile}</span>
+        </p>
+      </Modal>
+      <Modal visible={isVisibleComments} setVisible={setIsVisibleComments}>
+        {comments?.map((item: any) => {
+          return (
+            <Comment
+              key={item.id}
+              user_id={item.target_user_id}
+              comment={item.result}
+              date={dayjs(item.created_at).format("MM.DD.YYYY")}
+            />
+          );
+        })}
+      </Modal>
     </div>
   );
 };

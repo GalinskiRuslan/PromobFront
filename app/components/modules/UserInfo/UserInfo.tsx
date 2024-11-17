@@ -10,11 +10,14 @@ import {
   setVisibleLoader,
 } from "@/app/store/slices/appSlice";
 import { getUserInfoById } from "@/app/store/slices/usersSlice";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { Link } from "@/langs";
 import mapPin from "./assets/map pin.png";
-import { addContactsViewCount } from "@/app/store/slices/userSlice";
+import {
+  addContactsViewCount,
+  changeRating,
+} from "@/app/store/slices/userSlice";
 import Modal from "../../ui/modal/Modal";
 import siteSrc from "./assets/icons8-сайт-50.png";
 import whatsAppSrc from "./assets/icons8-whatsapp-32.png";
@@ -37,9 +40,9 @@ export const UserInfo = (props: Props) => {
   const { categories } = useSelector((state: any) => state.categories);
   const { user } = useSelector((state: any) => state.auth);
   const [userLocal, setUser] = useState<IUser | null>(null);
+  const [commentEditor, setCommentEditor] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
-  const [rating, setRating] = useState<any>(0);
-  const { theme } = useTheme();
+  const commentRef = useRef<HTMLDivElement>(null);
 
   const getAllCategoriesLoc = async () => {
     dispatch(setVisibleLoader(true));
@@ -86,6 +89,20 @@ export const UserInfo = (props: Props) => {
     getUserInfo();
     getAllCategoriesLoc();
   }, []);
+  const changeRatingLocal = async (value: any) => {
+    try {
+      await dispatch(
+        changeRating({ user_id: props.user_id, rating: value })
+      ).unwrap();
+      getUserInfo();
+    } catch (error: any) {
+      dispatch(setVisibleLoader(false));
+      dispatch(setErrorText(error.errorText));
+      dispatch(serErrorMethod(error.method));
+      dispatch(setIsOpenModal(true));
+      dispatch(setErrorCode(error.status));
+    }
+  };
 
   return (
     userLocal && (
@@ -127,16 +144,23 @@ export const UserInfo = (props: Props) => {
             </div>
           </div>
           <div className={cl.rightContent}>
-            <div className={cl.commentBtn}>
+            <div
+              className={cl.commentBtn}
+              onClick={() => {
+                commentRef.current?.scrollIntoView({ behavior: "smooth" });
+              }}
+            >
               <Image alt="message" src={datkmessageSrc} />
               {userLocal.comments?.length} отзывов
             </div>
             <p>Рейтинг пользователя</p>
             <StarRating
               maxStars={5}
-              onChange={setRating}
+              onChange={changeRatingLocal}
+              value={Math.floor(userLocal.ratingAverage)}
               readOnly={user?.role === "client" ? false : true}
             />
+            Оценок: {userLocal.rating ? userLocal.rating?.length : 0}
           </div>
         </div>
         <div className={cl.categories}>
@@ -173,12 +197,17 @@ export const UserInfo = (props: Props) => {
             </div>
           )}
         </div>
-        <div className={cl.commentsContainer} id="comments">
+        <div className={cl.commentsContainer} ref={commentRef}>
           <div className={cl.comments}>
             <p className={cl.commentsTitle}>
               Отзывы ({userLocal.comments?.length})
             </p>
-            <button className={cl.addcomentbtn}>Добавить отзыв</button>
+            <button
+              className={cl.addcomentbtn}
+              onClick={() => setCommentEditor(true)}
+            >
+              Добавить отзыв
+            </button>
           </div>
           {userLocal.comments?.map((item: any) => {
             return (
@@ -231,6 +260,13 @@ export const UserInfo = (props: Props) => {
             <Image alt="site" src={telSrc} width={30} height={30} />
             <p>{userLocal.tel}</p>
           </a>
+        </Modal>
+        <Modal visible={commentEditor} setVisible={setCommentEditor}>
+          <div className={cl.commentEditor}>
+            {user.role !== "client" && (
+              <p>Отзывы могут оставлять только клиенты</p>
+            )}
+          </div>
         </Modal>
       </div>
     )

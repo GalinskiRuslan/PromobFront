@@ -29,4 +29,6 @@ export interface IUser {
   created_at: string;
   updated_at: string;
   comments: Array<any>;
+  rating: Array<any>;
+  ratingAverage: number;
 }

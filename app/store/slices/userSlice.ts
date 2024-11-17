@@ -161,6 +161,23 @@ export const addContactsViewCount = createAsyncThunk(
     }
   }
 );
+export const changeRating = createAsyncThunk(
+  "changeRating",
+  async (
+    { user_id, rating }: { user_id: number; rating: number },
+    { rejectWithValue }
+  ) => {
+    try {
+      const response = await $axios.post<any>(`/ratingUpdate`, {
+        rated_user_id: user_id,
+        rating,
+      });
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);
 
 export const userSlice = createSlice({
   name: "user",
