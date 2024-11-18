@@ -17,6 +17,7 @@ import mapPin from "./assets/map pin.png";
 import {
   addContactsViewCount,
   changeRating,
+  postComment,
 } from "@/app/store/slices/userSlice";
 import Modal from "../../ui/modal/Modal";
 import siteSrc from "./assets/icons8-сайт-50.png";
@@ -31,6 +32,7 @@ import { getAllCategories } from "@/app/store/slices/categories";
 import { IUser } from "@/app/types";
 import { Comment } from "../../ui/Comment/Comment";
 import dayjs from "dayjs";
+import { Portfolio } from "../../ui/Portfolio/Portfolio";
 
 type Props = { user_id: number };
 
@@ -43,6 +45,7 @@ export const UserInfo = (props: Props) => {
   const [commentEditor, setCommentEditor] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const commentRef = useRef<HTMLDivElement>(null);
+  const [comment, setComment] = useState<string>("");
 
   const getAllCategoriesLoc = async () => {
     dispatch(setVisibleLoader(true));
@@ -95,6 +98,31 @@ export const UserInfo = (props: Props) => {
         changeRating({ user_id: props.user_id, rating: value })
       ).unwrap();
       getUserInfo();
+    } catch (error: any) {
+      dispatch(setVisibleLoader(false));
+      dispatch(setErrorText(error.errorText));
+      dispatch(serErrorMethod(error.method));
+      dispatch(setIsOpenModal(true));
+      dispatch(setErrorCode(error.status));
+    }
+  };
+  useEffect(() => {
+    if (user) {
+      userLocal?.comments?.forEach((comment: any) => {
+        if (comment.user_id == user.id) {
+          setComment(comment.result);
+        }
+      });
+    }
+  }, [user, userLocal]);
+
+  const sendComment = async () => {
+    try {
+      await dispatch(
+        postComment({ target_user_id: props.user_id, comment })
+      ).unwrap();
+      getUserInfo();
+      setCommentEditor(false);
     } catch (error: any) {
       dispatch(setVisibleLoader(false));
       dispatch(setErrorText(error.errorText));
@@ -174,6 +202,15 @@ export const UserInfo = (props: Props) => {
             );
           })}
         </div>
+        <Portfolio
+          portfolio={
+            !userLocal.gallery
+              ? []
+              : Array.isArray(JSON.parse(userLocal.gallery))
+              ? JSON.parse(userLocal.gallery)
+              : Object.values(JSON.parse(userLocal.gallery))
+          }
+        />
         <div className={cl.cardAbout}>
           <div className={cl.costContainer}>
             <Image src={money} alt="money" />
@@ -187,13 +224,13 @@ export const UserInfo = (props: Props) => {
           {userLocal.details && (
             <div className={cl.aboutContainer}>
               <p className={cl.costBold}>Детали работы</p>
-              <p>{userLocal.details}</p>
+              <p className={cl.text}>{userLocal.details}</p>
             </div>
           )}
           {userLocal.about_yourself && (
             <div className={cl.aboutContainer}>
               <p className={cl.costBold}>Обо мне</p>
-              <p>{userLocal.about_yourself}</p>
+              <p className={cl.text}>{userLocal.about_yourself}</p>
             </div>
           )}
         </div>
@@ -213,7 +250,7 @@ export const UserInfo = (props: Props) => {
             return (
               <Comment
                 key={item.id}
-                user_id={item.target_user_id}
+                user_id={item.user_id}
                 comment={item.result}
                 date={dayjs(item.created_at).format("MM.DD.YYYY")}
               />
@@ -265,6 +302,20 @@ export const UserInfo = (props: Props) => {
           <div className={cl.commentEditor}>
             {user?.role !== "client" && (
               <p>Отзывы могут оставлять только клиенты</p>
+            )}
+            {user?.role == "client" && (
+              <div className={cl.commentForm}>
+                <p>Оставить отзыв</p>
+                <textarea
+                  onChange={(e) => setComment(e.target.value)}
+                  value={comment}
+                  className={cl.textarea}
+                  placeholder="Введите текст"
+                />
+                <button onClick={sendComment} className={cl.sendBtn}>
+                  Отправить
+                </button>
+              </div>
             )}
           </div>
         </Modal>

@@ -50,6 +50,47 @@ export const getUserInfoById = createAsyncThunk(
     }
   }
 );
+export const getUsersWithCityAndCategory = createAsyncThunk(
+  "getUsersWithCityAndCategory",
+  async (
+    {
+      city_id,
+      category_id,
+      perPage,
+      page,
+    }: { city_id: number; category_id: number; perPage: number; page: number },
+    { rejectWithValue }
+  ) => {
+    try {
+      const response = await $axios.get<any>(
+        `/getUsersWithCityAndCategory?city=${city_id}&category=${category_id}&per_page=${perPage}&page=${page}`
+      );
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);
+export const getUsersWithCity = createAsyncThunk(
+  "getUsersWithCity",
+  async (
+    {
+      city_id,
+      perPage,
+      page,
+    }: { city_id: number; perPage: number; page: number },
+    { rejectWithValue }
+  ) => {
+    try {
+      const response = await $axios.get<any>(
+        `/getUsersWithCity?city=${city_id}&per_page=${perPage}&page=${page}`
+      );
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);
 
 export const usersSlice = createSlice({
   name: "users",

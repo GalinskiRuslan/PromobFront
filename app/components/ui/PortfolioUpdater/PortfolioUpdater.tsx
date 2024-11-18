@@ -37,9 +37,11 @@ export const PortfolioUpdater = ({ portfolio }: Props) => {
       const response = await dispatch(
         deletePortfolioPhoto(deleteProduct)
       ).unwrap();
+      setDeleteVisible(false);
       dispatch(setVisibleLoader(false));
     } catch (error: any) {
       dispatch(setVisibleLoader(false));
+      setDeleteVisible(false);
       dispatch(setIsOpenModal(true));
       dispatch(setErrorText(error.errorText));
       dispatch(serErrorMethod(error.method));

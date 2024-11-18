@@ -44,9 +44,10 @@ export const Comment = (props: Props) => {
       <div className={cl.photo}>
         <Image
           alt="photo"
-          src={user ? user.photos : noPhoto}
+          src={user?.photos ? user.photos : noPhoto}
           width={100}
           height={100}
+          className={cl.img}
         />
       </div>
       <div className={cl.rightContent}>
@@ -54,7 +55,7 @@ export const Comment = (props: Props) => {
           <p className={cl.name}>
             {user?.surname} {user?.name} {user?.surname_2}
           </p>
-          <p>Отзыв оставлен {props.date}</p>
+          <p className={cl.date}>Отзыв оставлен {props.date}</p>
         </div>
         <p className={cl.comment}>{props.comment}</p>
       </div>

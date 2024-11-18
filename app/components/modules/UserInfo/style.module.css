@@ -85,7 +85,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
-  margin-top: 20px;
+  margin: 20px 0;
 }
 .rightContent {
   color: #111;
@@ -154,6 +154,16 @@
   font-weight: 700;
   font-size: 18px;
   border: 1px solid #9161df;
+}
+.commentForm {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+.text {
+  font-size: 16px;
+  color: #111;
+  margin: 10px 0;
 }
 @media screen and (max-width: 720px) {
   .leftContent {

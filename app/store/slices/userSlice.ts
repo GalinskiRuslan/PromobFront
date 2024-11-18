@@ -178,6 +178,23 @@ export const changeRating = createAsyncThunk(
     }
   }
 );
+export const postComment = createAsyncThunk(
+  "postComment",
+  async (
+    { target_user_id, comment }: { target_user_id: number; comment: string },
+    { rejectWithValue }
+  ) => {
+    try {
+      const response = await $axios.post<any>(`/addComment`, {
+        target_user_id,
+        comment,
+      });
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);
 
 export const userSlice = createSlice({
   name: "user",

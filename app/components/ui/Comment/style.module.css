@@ -34,8 +34,18 @@
 .comment {
   flex-grow: 1; /* Комментарий занимает доступное место */
   margin-top: 1rem;
+  font-size: 16px;
+  color: #111;
+}
+.date {
+  font-size: 16px;
+  color: #111;
 }
 .name {
   font-size: 24px;
   font-weight: 700;
+}
+.img {
+  border-radius: 50%;
+  object-fit: cover;
 }

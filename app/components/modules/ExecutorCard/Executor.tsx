@@ -104,7 +104,7 @@ const Executor = ({ user }: Props) => {
             readOnly={true}
             value={user.ratingAverage}
           />
-          Оценок: {user.rating.length}
+          Оценок: {user.rating?.length}
         </div>
       </div>
       <Portfolio
