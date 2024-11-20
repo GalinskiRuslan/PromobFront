@@ -157,7 +157,7 @@ const Executor = ({ user }: Props) => {
         )}
         {user.instagram && (
           <a
-            href={`https://instagram.com/${user.site}`}
+            href={`https://instagram.com/${user.instagram}`}
             className={cl.linkContacts}
             target="_blank"
           >
