@@ -31,4 +31,8 @@ export interface IUser {
   comments: Array<any>;
   rating: Array<any>;
   ratingAverage: number;
+  isActive: {
+    is_active: boolean;
+    days_left: number;
+  };
 }

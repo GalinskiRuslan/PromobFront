@@ -7,6 +7,7 @@ import { authSlice } from "./slices/authSlice";
 import { appSlice } from "./slices/appSlice";
 import { categoriesSlice } from "./slices/categories";
 import { usersSlice } from "./slices/usersSlice";
+import { paymentSlice } from "./slices/paymentSlice";
 
 export const store = configureStore({
   reducer: {
@@ -16,6 +17,7 @@ export const store = configureStore({
     users: usersSlice.reducer,
     city: citySlice.reducer,
     categories: categoriesSlice.reducer,
+    payment: paymentSlice.reducer,
   },
 });
 
