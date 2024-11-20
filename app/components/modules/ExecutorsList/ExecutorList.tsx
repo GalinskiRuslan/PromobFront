@@ -122,7 +122,6 @@ export const ExecutorList = (props: Props) => {
       getUsersWithCityL();
     } else if (searchParams.get("category")) {
       getUsersWithCategory();
-      setCurrentPage(1);
     } else {
       getUsers();
     }
