@@ -26,6 +26,7 @@ import StarRating from "../Raiting/Raiting";
 import Modal from "../modal/Modal";
 import dayjs from "dayjs";
 import { getPaymentLink } from "@/app/store/slices/paymentSlice";
+import noPhoto from "./assets/Group2.png";
 
 interface Props {
   user: IUser;
@@ -96,7 +97,7 @@ export const ProfileCardEditor = ({ user }: Props) => {
           ) : (
             <Image
               alt="map"
-              src={user.photos}
+              src={user.photos ? user.photos : noPhoto}
               width={150}
               height={150}
               className={cl.img}
