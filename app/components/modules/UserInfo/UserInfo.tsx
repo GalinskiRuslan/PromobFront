@@ -88,10 +88,7 @@ export const UserInfo = (props: Props) => {
       console.log(error);
     }
   };
-  useEffect(() => {
-    getUserInfo();
-    getAllCategoriesLoc();
-  }, []);
+
   const changeRatingLocal = async (value: any) => {
     try {
       await dispatch(
@@ -115,6 +112,10 @@ export const UserInfo = (props: Props) => {
       });
     }
   }, [user, userLocal]);
+  useEffect(() => {
+    getUserInfo();
+    getAllCategoriesLoc();
+  }, []);
 
   const sendComment = async () => {
     try {
