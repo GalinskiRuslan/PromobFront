@@ -74,7 +74,14 @@ export const CategoryList = (props: Props) => {
                 : cl.listLink
             }
           >
-            <li key={category.id} className={cl.categoryItem}>
+            <li
+              key={category.id}
+              className={
+                searchParams.get("category") === category.id.toString()
+                  ? cl.categoryItemActive
+                  : cl.categoryItem
+              }
+            >
               <span>{category.category}</span>
               <span>{category.users_count}</span>
             </li>

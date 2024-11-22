@@ -6,9 +6,11 @@ export default function Home() {
   return (
     <div>
       <TopBanner />
-      {/* <p>Специалисты: </p> */}
+
       <div className={cl.content}>
+        <p className={cl.title}>Специалисты </p>
         <div className={cl.categories}>
+          <p className={cl.catTitle}>Кого вы ищете :</p>
           <CategoryList />
         </div>
         <div className={cl.users}>
