@@ -89,9 +89,19 @@ export const ProfileCardEditor = ({ user }: Props) => {
       )}
       <div className={cl.container}>
         <div className={cl.leftBlock}>
-          <div>
-            <ProfilePictureUploader />
-          </div>
+          {user.isActive ? (
+            <div>
+              <ProfilePictureUploader />
+            </div>
+          ) : (
+            <Image
+              alt="map"
+              src={user.photos}
+              width={150}
+              height={150}
+              className={cl.img}
+            />
+          )}
           <div className={cl.profileName}>
             {user.nickname_true ? (
               <p className={cl.name}>
