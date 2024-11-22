@@ -70,15 +70,22 @@ export const ProfileCardEditor = ({ user }: Props) => {
   if (!user) return null;
   return (
     <>
-      {user.isActive.is_active && (
+      {user.isActive.is_active ? (
         <div className={cl.isActiveContainer}>
           <p className={cl.isActive}>
             Ваш аккаунт активен ещё {user.isActive.days_left} дней
           </p>
+        </div>
+      ) : (
+        <>
+          <p className={cl.inActive}>
+            Ваш аккаунт не активен продлите подписку чтобы заказчики могли
+            видеть Ваш профиль и связываться с Вами
+          </p>
           <a href={payLink}>
             <button className={cl.payBtn}>Продлить подписку</button>
           </a>
-        </div>
+        </>
       )}
       <div className={cl.container}>
         <div className={cl.leftBlock}>
