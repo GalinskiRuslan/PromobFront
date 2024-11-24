@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch } from "@/app/store/store";
 import {
   setIsOpenLoginModal,
+  setIsOpenMobMenu,
   setIsOpenRegisterModal,
 } from "@/app/store/slices/appSlice";
 
@@ -19,7 +20,10 @@ export const RegisterButton = () => {
     <>
       <button
         className={cl.registerBtn}
-        onClick={() => dispatch(setIsOpenRegisterModal(true))}
+        onClick={() => {
+          dispatch(setIsOpenRegisterModal(true));
+          dispatch(setIsOpenMobMenu(false));
+        }}
       >
         Регистрация
       </button>

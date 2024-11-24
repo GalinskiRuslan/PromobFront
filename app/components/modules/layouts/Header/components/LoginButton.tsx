@@ -5,6 +5,7 @@ import { AppDispatch } from "@/app/store/store";
 import { useDispatch, useSelector } from "react-redux";
 import {
   setIsOpenLoginModal,
+  setIsOpenMobMenu,
   setIsOpenRegisterModal,
 } from "@/app/store/slices/appSlice";
 import { useState } from "react";
@@ -18,7 +19,10 @@ export const LoginButton = () => {
     <>
       <button
         className={cl.registerBtn}
-        onClick={() => dispatch(setIsOpenLoginModal(true))}
+        onClick={() => {
+          dispatch(setIsOpenLoginModal(true));
+          dispatch(setIsOpenMobMenu(false));
+        }}
       >
         Войти
       </button>

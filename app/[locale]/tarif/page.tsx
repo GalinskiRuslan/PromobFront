@@ -42,9 +42,16 @@ export default function Tarif() {
           </li>
         </ul>
         <p className={cl.title2}>
-          Все это доступно всего за <span className={cl.purepure}>5000</span> тг
-          в месяц! Присоединяйтесь к нам сегодня, чтобы начать свой путь к
-          успеху!
+          Все это доступно всего за
+          <span
+            className={cl.purepure}
+            style={{ display: "flex", flexDirection: "row" }}
+          >
+            <del style={{ marginRight: "8px" }}>10000</del>
+            <span>5000</span> тг
+          </span>{" "}
+          (для новых пользователей) в месяц! Присоединяйтесь к нам сегодня,
+          чтобы начать свой путь к успеху!
         </p>
       </div>
       <a href={payLink}>

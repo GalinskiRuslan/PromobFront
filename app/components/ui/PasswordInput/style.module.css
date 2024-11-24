@@ -26,3 +26,8 @@
   cursor: pointer;
   transition: 0.5s;
 }
+@media screen and (max-width: 680px) {
+  .input {
+    font-size: 16px;
+  }
+}
