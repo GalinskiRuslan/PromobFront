@@ -8,8 +8,8 @@ export default function Tarif() {
   const dispatch = useDispatch<AppDispatch>();
   const [payLink, setPayLink] = useState<any>(null);
   const getPayLink = async () => {
-    const data = await dispatch(getPaymentLink()).unwrap();
-    setPayLink(data.payment_link);
+    // const data = await dispatch(getPaymentLink()).unwrap();
+    // setPayLink(data.payment_link);
   };
   useEffect(() => {
     getPayLink();

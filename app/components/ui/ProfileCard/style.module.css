@@ -103,4 +103,11 @@
   .rightBlock {
     align-items: start;
   }
+  .inActive {
+    font-size: 16px;
+  }
+  .payBtn {
+    margin: 10px 0;
+    width: 100%;
+  }
 }

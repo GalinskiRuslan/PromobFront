@@ -49,3 +49,29 @@
   transition: 0.5s;
   margin-top: 50px;
 }
+@media screen and (max-width: 720px) {
+  .container {
+    margin-top: 20px;
+    padding: 20px;
+  }
+  .title {
+    font-size: 22px;
+  }
+  .text {
+    font-size: 16px;
+    margin: 10px 0;
+  }
+  .list {
+    font-size: 16px;
+  }
+  .li {
+    margin: 10px 0;
+  }
+  .title2 {
+    font-size: 22px;
+  }
+  .payBtn {
+    font-size: 16px;
+    margin-top: 20px;
+  }
+}
