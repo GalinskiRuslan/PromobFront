@@ -9,6 +9,7 @@ import cl from "./style.module.css";
 import { ErrorModal } from "../components/modules/ErrorModal/ErrorModal";
 import { Loader } from "../components/modules/Loader/Loader";
 import { Footer } from "../components/modules/layouts/Footer/Footer";
+import { LoginRegister } from "../components/modules/LoginRegisterModals/LoginRegister";
 
 export const metadata: Metadata = {
   title: "PROmobilograf",
@@ -41,6 +42,7 @@ export default function RootLayout({
               <Footer />
               <ErrorModal />
               <Loader />
+              <LoginRegister />
             </ThemeProvider>
           </body>
         </NextIntlClientProvider>

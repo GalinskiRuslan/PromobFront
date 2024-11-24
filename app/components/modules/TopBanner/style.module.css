@@ -87,6 +87,7 @@
   .container {
     height: 339px;
     max-width: 432px;
+    margin-top: 20px;
     background: url(./assets/mov.webp) no-repeat center;
   }
   .title {

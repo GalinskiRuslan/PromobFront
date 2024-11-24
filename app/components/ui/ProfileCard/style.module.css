@@ -101,6 +101,6 @@
     align-items: center;
   }
   .rightBlock {
-    align-items: center;
+    align-items: start;
   }
 }

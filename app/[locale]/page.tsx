@@ -1,5 +1,6 @@
 import { CategoryList } from "../components/modules/CategoryList/CategoryList";
 import { ExecutorList } from "../components/modules/ExecutorsList/ExecutorList";
+import { CityChangeButton } from "../components/modules/layouts/Header/components/CityChangeButton";
 import { TopBanner } from "../components/modules/TopBanner/TopBanner";
 import cl from "./style.module.css";
 export default function Home() {
@@ -8,12 +9,16 @@ export default function Home() {
       <TopBanner />
 
       <div className={cl.content}>
-        <p className={cl.title}>Специалисты </p>
         <div className={cl.categories}>
           <p className={cl.catTitle}>Кого вы ищете :</p>
           <CategoryList />
         </div>
+        <div className={cl.cityChange}>
+          <p className={cl.cityTitle}>Город:</p>
+          <CityChangeButton />
+        </div>
         <div className={cl.users}>
+          <p className={cl.title}>Специалисты </p>
           <ExecutorList />
         </div>
       </div>

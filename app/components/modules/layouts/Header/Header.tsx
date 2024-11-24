@@ -84,7 +84,7 @@ export const Header = () => {
             <Image src={srcLight} alt="logo" />
           )}
         </Link>
-        <CityChangeButton />
+        
       </div>
       <div className={isOpenMobMenu ? cl.rightItems_open : cl.rightItems}>
         <Image src={mobLogoSrc} alt="logo" className={cl.moblogo} />

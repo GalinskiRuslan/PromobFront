@@ -264,6 +264,10 @@
 .moblogo {
   display: none;
 }
+.purpureTitle {
+  color: #9161df;
+  font-weight: 700;
+}
 @media screen and (max-width: 1200px) {
   .moblogo {
     display: block;

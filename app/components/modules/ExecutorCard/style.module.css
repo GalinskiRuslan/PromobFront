@@ -148,4 +148,7 @@
     margin-bottom: 20px;
     padding: 15px;
   }
+  .rightContent {
+    align-items: start;
+  }
 }

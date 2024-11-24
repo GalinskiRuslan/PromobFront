@@ -32,6 +32,15 @@
   padding-bottom: 20px;
   border-bottom: 1px solid #ebe9e9;
 }
+.cityChange {
+  display: flex;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #ebe9e9;
+}
+.cityTitle {
+  font-size: 24px;
+  font-weight: 700;
+}
 @media screen and (max-width: 1200px) {
   .categories {
     display: none;
@@ -43,5 +52,11 @@
 @media screen and (max-width: 480px) {
   .container {
     padding: 40px 10px;
+  }
+  .title {
+    font-size: 22px;
+  }
+  .content {
+    margin-top: 20px;
   }
 }

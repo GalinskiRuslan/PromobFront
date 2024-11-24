@@ -50,7 +50,7 @@ export const CityChangeButton = () => {
     <>
       <button className={cl.buttonLocation} onClick={() => setVisible(true)}>
         <Image src={locationSrc} alt="location" />
-        <span>
+        <span className={cl.purpureTitle}>
           {pathName.includes("/city")
             ? cities?.find(
                 (city: any) => city.id == pathName.split("/city/")[1]
