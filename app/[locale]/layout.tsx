@@ -40,9 +40,9 @@ export default function RootLayout({
                 {children}
               </div>
               <Footer />
+              <LoginRegister />
               <ErrorModal />
               <Loader />
-              <LoginRegister />
             </ThemeProvider>
           </body>
         </NextIntlClientProvider>
