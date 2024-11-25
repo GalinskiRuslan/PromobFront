@@ -19,7 +19,7 @@ export const TopBanner = (props: Props) => {
 
         <p className={cl.text}>Создайте портфолио и начните получать заказы</p>
         <br />
-        <p className={cl.text}>Бесплатная регистрация</p>
+        <p className={cl.text}>Лучшие специалисты только у нас на платформе</p>
       </div>
       <div className={cl.rightContainer}>
         <p className={cl.text12}>
