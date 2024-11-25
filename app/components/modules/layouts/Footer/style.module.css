@@ -7,6 +7,10 @@
   width: 100%;
   margin: 0 auto;
   padding: 80px 20px;
+  display: flex;
+  gap: 30px;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
 .proBtn {
   max-width: 240px;
@@ -25,4 +29,24 @@
   background-color: transparent;
   color: #9161df;
   transition: 0.5s;
+}
+.copyriter {
+  color: #fff;
+  font-size: 16px;
+  text-align: center;
+}
+.socialCont {
+  display: flex;
+  justify-content: space-between;
+}
+.title {
+  font-size: 18px;
+  font-weight: 700;
+  color: #fff;
+}
+@media screen and (max-width: 720px) {
+  .innerContainer {
+    text-align: center;
+    justify-content: center;
+  }
 }
