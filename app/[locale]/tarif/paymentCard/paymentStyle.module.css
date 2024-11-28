@@ -1,0 +1,60 @@
+.container {
+  max-width: 280px;
+  width: 100%;
+  border-radius: 40px;
+  border: 1px solid #9161df;
+  padding: 20px;
+  margin-top: 20px;
+}
+.title {
+  font-size: 24px;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 20px;
+}
+.subtitle {
+  font-size: 18px;
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #ccc;
+}
+.price {
+  font-size: 32px;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 20px;
+  color: #9161df;
+}
+.text {
+  font-size: 20px;
+}
+.payBtn {
+  background-color: #9161df;
+  color: #fff;
+  border-radius: 8px;
+  padding: 15px 20px;
+  cursor: pointer;
+  transition: 0.5s;
+  font-weight: 700;
+  font-size: 18px;
+  border: 1px solid #9161df;
+  width: 100%;
+  margin-top: 20px;
+}
+@media screen and (max-width: 720px) {
+  .title {
+    font-size: 18px;
+  }
+  .subtitle {
+    font-size: 14px;
+  }
+  .price {
+    font-size: 20px;
+  }
+  .text {
+    font-size: 16px;
+  }
+  .payBtn {
+    font-size: 14px;
+  }
+}

@@ -27,6 +27,7 @@ import Modal from "../modal/Modal";
 import dayjs from "dayjs";
 import { getPaymentLink } from "@/app/store/slices/paymentSlice";
 import noPhoto from "./assets/Group2.png";
+import { Link } from "@/langs";
 
 interface Props {
   user: IUser;
@@ -83,9 +84,9 @@ export const ProfileCardEditor = ({ user }: Props) => {
             Ваш аккаунт не активен продлите подписку чтобы заказчики могли
             видеть Ваш профиль и связываться с Вами
           </p>
-          <a href={payLink}>
+          <Link href="/tarif">
             <button className={cl.payBtn}>Продлить подписку</button>
-          </a>
+          </Link>
         </>
       )}
       <div className={cl.container}>
