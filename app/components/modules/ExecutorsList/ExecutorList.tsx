@@ -141,8 +141,10 @@ export const ExecutorList = (props: Props) => {
   return (
     <div className={cl.container}>
       <span ref={refAnchor}></span>
-      {filters.iisRatingOrder
-        ? users.sort(() => Math.random() - 0.5)
+      {!filters.isRatingOrder
+        ? users
+            .sort(() => Math.random() - 0.5)
+            .map((user: any) => <Executor user={user} key={user.id} />)
         : users.map((user: any) => <Executor user={user} key={user.id} />)}
       <PaginationPages
         currentPage={currentPage}
