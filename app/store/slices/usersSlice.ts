@@ -3,15 +3,36 @@
 import $axios from "@/app/http";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
+interface initialState {
+  users: any;
+  filters: {
+    isRatingOrder: boolean;
+    isCommentsOrder: boolean;
+  };
+}
+const initialState: initialState = {
+  users: null,
+  filters: {
+    isRatingOrder: false,
+    isCommentsOrder: false,
+  },
+};
+
 export const getAllUsers = createAsyncThunk(
   "userComments",
   async (
-    { perPage, page }: { perPage: number; page: number },
+    {
+      perPage,
+      page,
+      isRatingOrder,
+    }: { perPage: number; page: number; isRatingOrder?: boolean },
     { rejectWithValue }
   ) => {
     try {
       const response = await $axios.get<any>(
-        `/getUsersWithPagination?per_page=${perPage}&page=${page}`
+        `/getUsersWithPagination?per_page=${perPage}&page=${page}${
+          isRatingOrder ? "&sortByRating=" + isRatingOrder : ""
+        }`
       );
       return response.data;
     } catch (error) {
@@ -94,12 +115,18 @@ export const getUsersWithCity = createAsyncThunk(
 
 export const usersSlice = createSlice({
   name: "users",
-  initialState: {
-    user: null,
-  },
+  initialState: initialState,
   reducers: {
     setUsers: (state, action) => {
-      state.user = action.payload;
+      state.users = action.payload;
+    },
+    setRatingFilter: (state, action) => {
+      state.filters.isRatingOrder = action.payload;
     },
   },
 });
+export const {
+  setRatingFilter,
+}: {
+  setRatingFilter: any;
+} = usersSlice.actions;

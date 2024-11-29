@@ -1,5 +1,4 @@
 "use client";
-
 import {
   serErrorMethod,
   setErrorCode,
@@ -15,7 +14,7 @@ import {
 } from "@/app/store/slices/usersSlice";
 import { AppDispatch } from "@/app/store/store";
 import { useEffect, useRef, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Executor from "../ExecutorCard/Executor";
 import cl from "./style.module.css";
 import { useSearchParams } from "next/dist/client/components/navigation";
@@ -31,12 +30,17 @@ export const ExecutorList = (props: Props) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const refAnchor = useRef<HTMLSpanElement | null>(null);
+  const { filters } = useSelector((state: any) => state.users);
   const dispatch = useDispatch<AppDispatch>();
   const getUsers = async () => {
     dispatch(setVisibleLoader(true));
     try {
       const response = await dispatch(
-        getAllUsers({ perPage: 20, page: currentPage })
+        getAllUsers({
+          perPage: 20,
+          page: currentPage,
+          isRatingOrder: filters.isRatingOrder,
+        })
       ).unwrap();
       setUsers(response.data);
       setTotalPages(response.meta.total_pages);
@@ -116,7 +120,7 @@ export const ExecutorList = (props: Props) => {
     } else {
       getUsers();
     }
-  }, [searchParams]);
+  }, [searchParams, filters]);
   useEffect(() => {
     if (path.includes("city")) {
       getUsersWithCityL();
@@ -125,7 +129,7 @@ export const ExecutorList = (props: Props) => {
     } else {
       getUsers();
     }
-  }, [currentPage]);
+  }, [currentPage, filters]);
   useEffect(() => {
     if (refAnchor.current) {
       refAnchor.current.scrollIntoView({ behavior: "smooth" });
@@ -137,11 +141,9 @@ export const ExecutorList = (props: Props) => {
   return (
     <div className={cl.container}>
       <span ref={refAnchor}></span>
-      {users
-        .sort(() => Math.random() - 0.5)
-        .map((user: any) => (
-          <Executor user={user} key={user.id} />
-        ))}
+      {filters.iisRatingOrder
+        ? users.sort(() => Math.random() - 0.5)
+        : users.map((user: any) => <Executor user={user} key={user.id} />)}
       <PaginationPages
         currentPage={currentPage}
         totalPages={totalPages}
