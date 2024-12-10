@@ -20,7 +20,7 @@ export const Portfolio = (props: Props) => {
         <button className={cl.btnBack} onClick={() => router.back()}>
           Назад
         </button>
-        <button className={cl.nextBtn} onClick={() => router.push("/tarif")}>
+        <button className={cl.nextBtn} onClick={() => router.push("/profile")}>
           Далее
         </button>
       </div>
